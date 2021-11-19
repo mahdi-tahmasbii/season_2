@@ -1,0 +1,63 @@
+{% extends 'registration/base.html' %}
+
+{% block title-meta %} Products List{% endblock %}
+{% block title %}  Products List {% endblock %}
+
+{% block main %}
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body table-responsive p-0">
+            <table class="table table-hover text-nowrap">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>User</th>
+                    <th>Product</th>
+                    <th></th>
+                    <th>Price</th>
+                    <th>Active</th>
+                    <th>Especial</th>
+                    <th>Offer</th>
+                    <th>Suggestion</th>
+                    <th>Date</th>
+                    <th>Description</th>
+                    <th>Status</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for product in object_list %}
+                <tr>
+                    <td>{{ product.id }}</td>
+                    <td>{{product.user}}</td>
+                    <td>{{product.title}}</td>
+                    <td><img src="{{product.image.url}}" width="130" height="85"></td>
+                    <td>{{product.price}}</td>
+                    <td>{{product.active}}</td>
+                    <td>{{product.is_especial}}</td>
+                    <td>{{product.offer}}</td>
+                    <td>{{product.our_suggestion}}</td>
+                    <td>{{product.time}}</td>
+                    <td>{{product.description | striptags |truncatewords:8}}</td>
+                    <td>
+                        {% if product.status == 'p' %}
+                        <span class="badge badge-success">Publish</span>
+                        <a href="{{product.get_absolute_url}}" class="badge badge-primary" target="_blank">See</a>
+                        {% else %}
+                        <span class="badge badge-danger">Draft</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+</div>
+</div>
+{% endblock%}

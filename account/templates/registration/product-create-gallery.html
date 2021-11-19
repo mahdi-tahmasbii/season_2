@@ -1,0 +1,32 @@
+{% extends 'registration/base.html' %}
+{% load crispy_forms_tags %}
+{% block title-meta %} Product Gallery {% endblock %}
+{% block title %}  Products Creator {% endblock %}
+
+{% block main %}
+<div class="col-md-12">
+    <div class="card card-primary">
+        <div class="card-header">
+            <h1 class="card-title mb-0">Add Product
+            </h1>
+        </div>
+        <div class="card-body">
+            <form method="post" enctype="multipart/form-data">
+                {%csrf_token%}
+                <div class="row">
+                    <div class="col-6">
+                        {{ form.title|as_crispy_field }}
+                    </div>
+                    <div class="col-6">
+                        {{ form.product|as_crispy_field }}
+                    </div>
+                    <div class="col-6">
+                        {{ form.image|as_crispy_field }}
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-success">Create</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
