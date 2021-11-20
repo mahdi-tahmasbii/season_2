@@ -10,6 +10,7 @@
 
         </div>
         <!-- /.card-header -->
+        {% if object_list%}
         <div class="card-body table-responsive p-0">
             <table class="table table-hover text-nowrap">
                 <thead>
@@ -37,6 +38,11 @@
                         {% else %}
                         <span class="badge badge-danger">Draft</span>
                         {% endif %}
+
+                        {% if user.is_superuser%}
+                        <a class="badge text-danger"
+                           href="{% url 'account:productgallerydelete' product.pk %}">Delete</a>
+                        {% endif %}
                     </td>
                 </tr>
                 {% endfor %}
@@ -44,6 +50,9 @@
             </table>
         </div>
         <!-- /.card-body -->
+        {% else %}
+        <h3>Nothing To Show</h3>
+        {% endif %}
     </div>
     <!-- /.card -->
 </div>

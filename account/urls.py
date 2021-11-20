@@ -1,12 +1,12 @@
 from django.contrib.auth import views
 from django.urls import path
 from .views import ProductList, ProductGallery, ProductCreator, ProductCreatorGallery, ProductCreatorUpdate, \
-    ProductCreatorGalleryUpdate
+    ProductCreatorGalleryUpdate, ProductDeleteView, ProductGalleryDeleteView
 
 app_name = 'account'
 urlpatterns = [
     path('login/', views.LoginView.as_view(), name='login'),
-    # path('logout/', views.LogoutView.as_view(), name='logout'),
+    path('logout/', views.LogoutView.as_view(), name='logout'),
     #
     # path('password_change/', views.PasswordChangeView.as_view(), name='password_change'),
     # path('password_change/done/', views.PasswordChangeDoneView.as_view(), name='password_change_done'),
@@ -22,5 +22,7 @@ urlpatterns += [
     path('product/create', ProductCreator.as_view(), name='productcreator'),
     path('product/create/<int:pk>', ProductCreatorUpdate.as_view(), name='productupdate'),
     path('product/create/gallery', ProductCreatorGallery.as_view(), name='productcreatorgallery'),
-    path('product/create/gallery/<int:pk>', ProductCreatorGalleryUpdate.as_view(), name='productgalleryupdate')
+    path('product/create/gallery/<int:pk>', ProductCreatorGalleryUpdate.as_view(), name='productgalleryupdate'),
+    path('product/delete/<int:pk>', ProductDeleteView.as_view(), name='productdelete'),
+    path('product/delete/gallery/<int:pk>', ProductGalleryDeleteView.as_view(), name='productgallerydelete'),
 ]

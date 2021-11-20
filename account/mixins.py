@@ -89,3 +89,13 @@ class AuthorAccessGalleryMixin():
             return super().dispatch(request, *args, **kwargs)
         else:
             raise Http404('YOU CAN`T SEE THIS PAGE')
+
+
+class SuperuserAccessMixin():
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_superuser:
+            return super().dispatch(request, *args, **kwargs)
+        else:
+            raise Http404('YOU CAN`T SEE THIS PAGE')
+
+

@@ -24,7 +24,8 @@
                     {% else %}
                     <button class="btn btn-primary">{{user}}</button>
                     {% endif %}
-                </div> <hr>
+                </div>
+                <hr>
                 <div class="row">
                     <div class="col-6">
                         {{ form.title|as_crispy_field }}
@@ -37,6 +38,10 @@
                     </div>
                 </div>
                 <button type="submit" class="btn btn-success">Create</button>
+                {% if user.is_superuser and request.resolver_match.kwargs.pk %}
+                <a href="{% url 'account:productgallerydelete' request.resolver_match.kwargs.pk  %}"
+                   class="btn btn-danger">Delete</a>
+                {% endif %}
             </form>
         </div>
     </div>

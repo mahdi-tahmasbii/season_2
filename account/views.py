@@ -1,10 +1,13 @@
 from django.shortcuts import render
+from django.urls import reverse_lazy
+from django.views.generic.edit import DeleteView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, UpdateView, DetailView, CreateView, DeleteView
 from eshop_products.models import ProductsList, ProductsGallery
 from django.urls import reverse
-from .mixins import FieldsMixin, FormValidMixin, FieldsGalleryMixin, AuthorAccessProductMixin, AuthorAccessGalleryMixin
+from .mixins import FieldsMixin, FormValidMixin, FieldsGalleryMixin, AuthorAccessProductMixin, AuthorAccessGalleryMixin, \
+    SuperuserAccessMixin
 
 
 # Create your views here.
@@ -67,3 +70,15 @@ class ProductCreatorGalleryUpdate(AuthorAccessGalleryMixin, UpdateView):
 
     def get_success_url(self):
         return reverse('account:home')
+
+
+class ProductDeleteView(SuperuserAccessMixin, DeleteView):
+    model = ProductsList
+    success_url = reverse_lazy('account:home')
+    template_name = 'registration/productslist_confirm_delete.html'
+
+
+class ProductGalleryDeleteView(SuperuserAccessMixin, DeleteView):
+    model = ProductsGallery
+    success_url = reverse_lazy('account:home')
+    template_name = 'registration/productsgallery_confirm_delete.html'
