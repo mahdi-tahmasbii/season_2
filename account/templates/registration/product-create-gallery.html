@@ -1,18 +1,30 @@
 {% extends 'registration/base.html' %}
 {% load crispy_forms_tags %}
 {% block title-meta %} Product Gallery {% endblock %}
-{% block title %}  Products Creator {% endblock %}
+{% block title %}  Products Gallery {% endblock %}
 
 {% block main %}
 <div class="col-md-12">
     <div class="card card-primary">
         <div class="card-header">
-            <h1 class="card-title mb-0">Add Product
+            <h1 class="card-title mb-0">Add Product Gallery
             </h1>
         </div>
         <div class="card-body">
             <form method="post" enctype="multipart/form-data">
                 {%csrf_token%}
+                <div class="row">
+                    {% if user.is_superuser %}
+                    <div class="col-6">
+                        {{ form.user }}
+                    </div>
+                    <div class="col-6">
+                        {{ form.status }}
+                    </div>
+                    {% else %}
+                    <button class="btn btn-primary">{{user}}</button>
+                    {% endif %}
+                </div> <hr>
                 <div class="row">
                     <div class="col-6">
                         {{ form.title|as_crispy_field }}

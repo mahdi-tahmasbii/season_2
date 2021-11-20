@@ -61,7 +61,7 @@ class ProductsList(models.Model):
         ('b', "برگشت داده شده"),  # back
     )
     status = models.CharField(max_length=1, choices=STATUS_CHOICES)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
     title = models.CharField(max_length=150)
     slug = AutoSlugField(populate_from='title')
     description = models.TextField()
@@ -91,6 +91,14 @@ class ProductsList(models.Model):
 
 
 class ProductsGallery(models.Model):
+    STATUS_CHOICES = (
+        ('d', 'پیش‌نویس'),  # draft
+        ('p', "منتشر شده"),  # publish
+        ('i', "در حال بررسی"),  # investigation
+        ('b', "برگشت داده شده"),  # back
+    )
+    status = models.CharField(max_length=1, choices=STATUS_CHOICES)
+    user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
     title = models.CharField(max_length=150, verbose_name='عنوان')
     image = models.ImageField(upload_to=upload_gallery_image_path, verbose_name='تصویر')
     product = models.ForeignKey(ProductsList, on_delete=models.CASCADE, verbose_name='محصول')

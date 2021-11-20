@@ -14,12 +14,14 @@
             <form method="post" enctype="multipart/form-data">
                 {%csrf_token%}
                 <div class="row">
+                    {% if user.is_superuser%}
                     <div class="col-6">
                         {{ form.user|as_crispy_field }}
                     </div>
                     <div class="col-6">
                         {{ form.status|as_crispy_field }}
                     </div>
+                    {% endif %}
                 </div>
                 <div class="row">
                     <div class="col-6">

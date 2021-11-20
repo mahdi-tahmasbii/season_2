@@ -96,6 +96,7 @@
 
                     <!-- Single Product Start -->
                     {% for product in products %}
+                    {% if product.status == 'p' %}
                     <div class="col-lg-4 col-md-4 col-sm-6 product aos-init aos-animate" data-aos="fade-up"
                          data-aos-delay="200">
                         <div class="product-inner">
@@ -146,6 +147,7 @@
                             </div>
                         </div>
                     </div>
+                    {% endif %}
                     {% endfor %}
                     <!-- Single Product End -->
 

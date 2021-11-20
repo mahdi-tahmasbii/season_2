@@ -1,6 +1,7 @@
 from django.contrib.auth import views
 from django.urls import path
-from .views import ProductList, ProductCreator,ProductCreatorGallery
+from .views import ProductList, ProductGallery, ProductCreator, ProductCreatorGallery, ProductCreatorUpdate, \
+    ProductCreatorGalleryUpdate
 
 app_name = 'account'
 urlpatterns = [
@@ -17,6 +18,9 @@ urlpatterns = [
 ]
 urlpatterns += [
     path('', ProductList.as_view(), name='home'),
+    path('gallery/', ProductGallery.as_view(), name='gallery'),
     path('product/create', ProductCreator.as_view(), name='productcreator'),
-    path('product/create/gallery', ProductCreatorGallery.as_view(), name='productcreatorgallery')
+    path('product/create/<int:pk>', ProductCreatorUpdate.as_view(), name='productupdate'),
+    path('product/create/gallery', ProductCreatorGallery.as_view(), name='productcreatorgallery'),
+    path('product/create/gallery/<int:pk>', ProductCreatorGalleryUpdate.as_view(), name='productgalleryupdate')
 ]
