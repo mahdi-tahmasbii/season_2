@@ -1,12 +1,15 @@
+from django.http import Http404
 from django.shortcuts import render, redirect
 from eshop_products import models
 from eshop_products import forms
 from eshop_categories.models import ProductsCategory
 from django.shortcuts import render, get_object_or_404
+from django.views.generic import ListView, DetailView, UpdateView, DeleteView
+from account.mixins import AuthorAccessProductMixin
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
-
 def products_list(request, slug=None):
     products = models.ProductsList.objects.all()
     categories = ProductsCategory.objects.filter(is_sub=False)
@@ -44,3 +47,17 @@ def products_detail(request, *args, **kwargs):
 
     }
     return render(request, 'products_detail/products_detail.html', context)
+
+
+@login_required
+def products_preview(request, pk):
+    if request.user.is_superuser or request.user.is_author:
+        product: models.ProductsList = models.ProductsList.objects.get(pk=pk)
+        product_gallery = models.ProductsGallery.objects.filter(pk=pk)
+        context = {
+            'product': product,
+            'gallery': product_gallery,
+        }
+        return render(request, 'products_detail/product_preview.html', context)
+    else:
+        raise Http404('Not For You')

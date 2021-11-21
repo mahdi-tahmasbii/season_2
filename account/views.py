@@ -52,7 +52,7 @@ class ProductCreatorGallery(LoginRequiredMixin, FieldsGalleryMixin, FormValidMix
         return reverse('account:home')
 
 
-class ProductCreatorUpdate(AuthorAccessProductMixin, FormValidMixin, FieldsMixin, UpdateView):
+class ProductCreatorUpdate(LoginRequiredMixin, AuthorAccessProductMixin, FormValidMixin, FieldsMixin, UpdateView):
     model = ProductsList
     fields = ['user', 'status', 'title', 'description', 'full_info_description', 'price', 'image', 'categories', 'tag',
               'Weight',
@@ -63,7 +63,7 @@ class ProductCreatorUpdate(AuthorAccessProductMixin, FormValidMixin, FieldsMixin
         return reverse('account:home')
 
 
-class ProductCreatorGalleryUpdate(AuthorAccessGalleryMixin, UpdateView):
+class ProductCreatorGalleryUpdate(LoginRequiredMixin, FieldsGalleryMixin, FormValidMixin, UpdateView):
     model = ProductsGallery
     fields = ['user', 'status', 'title', 'image', 'product']
     template_name = "registration/product-create-gallery.html"
@@ -72,13 +72,13 @@ class ProductCreatorGalleryUpdate(AuthorAccessGalleryMixin, UpdateView):
         return reverse('account:home')
 
 
-class ProductDeleteView(SuperuserAccessMixin, DeleteView):
+class ProductDeleteView(LoginRequiredMixin, SuperuserAccessMixin, DeleteView):
     model = ProductsList
     success_url = reverse_lazy('account:home')
     template_name = 'registration/productslist_confirm_delete.html'
 
 
-class ProductGalleryDeleteView(SuperuserAccessMixin, DeleteView):
+class ProductGalleryDeleteView(LoginRequiredMixin, SuperuserAccessMixin, DeleteView):
     model = ProductsGallery
     success_url = reverse_lazy('account:home')
     template_name = 'registration/productsgallery_confirm_delete.html'

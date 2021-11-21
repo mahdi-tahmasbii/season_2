@@ -76,7 +76,7 @@ class FormValidMixin():
 class AuthorAccessProductMixin():
     def dispatch(self, request, pk, *args, **kwargs):
         product = get_object_or_404(ProductsList, pk=pk)
-        if product.user == request.user and product.status == 'd' or request.user.is_superuser:
+        if product.user == request.user and product.status in ['b', 'd'] or request.user.is_superuser:
             return super().dispatch(request, *args, **kwargs)
         else:
             raise Http404('YOU CAN`T SEE THIS PAGE')
@@ -85,7 +85,7 @@ class AuthorAccessProductMixin():
 class AuthorAccessGalleryMixin():
     def dispatch(self, request, pk, *args, **kwargs):
         product = get_object_or_404(ProductsGallery, pk=pk)
-        if product.user == request.user and product.status == 'd' or request.user.is_superuser:
+        if product.user == request.user and product.status == ['b', 'd'] or request.user.is_superuser:
             return super().dispatch(request, *args, **kwargs)
         else:
             raise Http404('YOU CAN`T SEE THIS PAGE')
@@ -97,5 +97,3 @@ class SuperuserAccessMixin():
             return super().dispatch(request, *args, **kwargs)
         else:
             raise Http404('YOU CAN`T SEE THIS PAGE')
-
-

@@ -34,7 +34,7 @@
                 <tr>
                     <td>{{ product.id }}</td>
                     <td>{{product.user}}</td>
-                    {% if product.status == 'd' or user.is_superuser %}
+                    {% if product.status in 'bd'|make_list or user.is_superuser %}
                     <td><a href="{% url 'account:productupdate' product.pk %}">{{product.title}}</a></td>
                     {% else %}
                     <td>{{product.title}}</td>
@@ -51,8 +51,19 @@
                         {% if product.status == 'p' %}
                         <span class="badge badge-success">Publish</span>
                         <a href="{{product.get_absolute_url}}" class="badge badge-primary" target="_blank">See</a>
+                        {% elif product.status == 'i' %}
+                        <span class="badge badge-primary">Investigation</span>
+                        {% if user.is_superuser  %}
+                        <a href="{% url 'eshop_products:products_preview' product.pk  %}" class="badge badge-primary" target="_blank">See</a>
+                        {% endif %}
+
                         {% else %}
+
+                        {% if product.status == 'd' %}
                         <span class="badge badge-danger">Draft</span>
+                        {% else %}
+                        <span class="badge badge-warning">Back</span>
+                        {% endif %}
                         {% endif %}
 
                         {% if user.is_superuser %}

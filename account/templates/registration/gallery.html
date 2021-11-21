@@ -17,6 +17,7 @@
                 <tr>
                     <th>Id</th>
                     <th>User</th>
+                    <th>Title</th>
                     <th>Product</th>
                     <th></th>
                 </tr>
@@ -26,17 +27,25 @@
                 <tr>
                     <td>{{ product.id }}</td>
                     <td>{{product.user}}</td>
-                    {% if product.status == 'd' or user.is_superuser %}
+                    {% if product.status in 'bd'|make_list or user.is_superuser %}
                     <td><a href="{% url 'account:productgalleryupdate' product.pk %}">{{product.title}}</a></td>
                     {% else %}
                     <td>{{product.title}}</td>
                     {% endif %}
+                    <td>{{product.product}}</td>
                     <td><img src="{{product.image.url}}" width="130" height="85"></td>
                     <td>
                         {% if product.status == 'p' %}
                         <span class="badge badge-success">Publish</span>
+                        {% elif product.status == 'i' %}
+                        <span class="badge badge-primary">Investigation</span>
                         {% else %}
+
+                        {% if product.status == 'd' %}
                         <span class="badge badge-danger">Draft</span>
+                        {% else %}
+                        <span class="badge badge-warning">Back</span>
+                        {% endif %}
                         {% endif %}
 
                         {% if user.is_superuser%}
