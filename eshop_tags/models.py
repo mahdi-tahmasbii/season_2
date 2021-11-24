@@ -12,6 +12,7 @@ class Tag(models.Model):
     name = models.CharField(max_length=150, verbose_name='عنوان در URL')
     timestamp = models.DateTimeField(auto_now_add=True)
     active = models.BooleanField(default=True)
+    is_color = models.BooleanField(null=True, blank=True)
 
     def __str__(self):
         return self.title
