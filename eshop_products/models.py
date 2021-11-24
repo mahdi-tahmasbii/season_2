@@ -41,8 +41,8 @@ class ProductsManager(models.Manager):
     def get_active_products(self):
         return self.get_queryset().filter(active=True)
 
-    def get_products_by_category(self, category_name):
-        return self.get_queryset().filter(categories_name_iexact=category_name, active=True)
+    def get_products_by_tag(self, tag_name):
+        return self.get_queryset().filter(tag_name_iexact=tag_name, active=True)
 
     def search(self, query):
         lookup = (

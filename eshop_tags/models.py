@@ -18,3 +18,6 @@ class Tag(models.Model):
 
     class Meta:
         unique_together = ('title', 'slug')
+
+    def get_absolute_url(self):
+        return reverse('eshop_products:products_list', args=[self.slug, ])

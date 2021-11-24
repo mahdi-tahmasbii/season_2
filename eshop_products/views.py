@@ -7,6 +7,7 @@ from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView, UpdateView, DeleteView
 from account.mixins import AuthorAccessProductMixin
 from django.contrib.auth.decorators import login_required
+from eshop_tags.models import Tag
 
 
 # Create your views here.
@@ -16,11 +17,26 @@ def products_list(request, slug=None):
     if slug:
         category = get_object_or_404(ProductsCategory, slug=slug)
         products = models.ProductsList.objects.filter(categories=category)
-
+    tag = Tag.objects.all()
     context = {
         'products': products,
         'categories': categories,
+        'tag': tag,
+    }
+    return render(request, 'products_list/products_list.html', context)
 
+
+def product_tag(request, slug):
+    products = models.ProductsList.objects.all()
+    tag = Tag.objects.all()
+    if slug:
+        tags = get_object_or_404(Tag, slug=slug)
+        products = models.ProductsList.objects.filter(tag=tags)
+    categories = ProductsCategory.objects.filter(is_sub=False)
+    context = {
+        'tag': tag,
+        'products': products,
+        'categories': categories,
     }
     return render(request, 'products_list/products_list.html', context)
 

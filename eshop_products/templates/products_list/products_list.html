@@ -32,52 +32,13 @@
                     <!-- Shop Top Bar Left start -->
                     <div class="shop-top-bar-left mb-md-0 mb-2">
                         <div class="shop-top-show">
-                            <span>Showing 1–12 of 39 results</span>
+                            <span>Showing 1–12 of {{products.count}} results</span>
                         </div>
                     </div>
                     <!-- Shop Top Bar Left end -->
 
                     <!-- Shopt Top Bar Right Start -->
                     <div class="shop-top-bar-right">
-                        <div class="shop-short-by mr-4">
-                            <select class="nice-select" aria-label=".form-select-sm example" style="display: none;">
-                                <option selected="">Show 24</option>
-                                <option value="1">Show 24</option>
-                                <option value="2">Show 12</option>
-                                <option value="3">Show 15</option>
-                                <option value="3">Show 30</option>
-                            </select>
-                            <div class="nice-select" tabindex="0"><span class="current">Show 24</span>
-                                <ul class="list">
-                                    <li data-value="Show 24" class="option selected">Show 24</li>
-                                    <li data-value="1" class="option">Show 24</li>
-                                    <li data-value="2" class="option">Show 12</li>
-                                    <li data-value="3" class="option">Show 15</li>
-                                    <li data-value="3" class="option">Show 30</li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div class="shop-short-by mr-4">
-                            <select class="nice-select" aria-label=".form-select-sm example" style="display: none;">
-                                <option selected="">Short by Default</option>
-                                <option value="1">Short by Popularity</option>
-                                <option value="2">Short by Rated</option>
-                                <option value="3">Short by Latest</option>
-                                <option value="3">Short by Price</option>
-                                <option value="3">Short by Price</option>
-                            </select>
-                            <div class="nice-select" tabindex="0"><span class="current">Short by Default</span>
-                                <ul class="list">
-                                    <li data-value="Short by Default" class="option selected">Short by Default</li>
-                                    <li data-value="1" class="option">Short by Popularity</li>
-                                    <li data-value="2" class="option">Short by Rated</li>
-                                    <li data-value="3" class="option">Short by Latest</li>
-                                    <li data-value="3" class="option">Short by Price</li>
-                                    <li data-value="3" class="option">Short by Price</li>
-                                </ul>
-                            </div>
-                        </div>
 
                         <div class="shop_toolbar_btn">
                             <button data-role="grid_3" type="button" class="active btn-grid-4" title="Grid"><i
@@ -315,13 +276,10 @@
                             <h3 class="widget-title mb-4">Tags</h3>
                             <div class="sidebar-body">
                                 <ul class="tags mb-n2">
-                                    <li><a href="#">Men</a></li>
-                                    <li><a href="#">Women</a></li>
-                                    <li><a href="#">Fashion</a></li>
-                                    <li><a href="#">Watch</a></li>
-                                    <li><a href="#">Handmade</a></li>
-                                    <li><a href="#">Lather</a></li>
-                                    <li><a href="#">Fabrics</a></li>
+                                    {% for tag in tag %}
+                                    <li><a href=" {% url 'eshop_products:products_tag' tag.slug %} ">{{tag.title}}</a>
+                                    </li>
+                                    {% endfor %}
                                 </ul>
                             </div>
                         </div>
