@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'crispy_forms',
     'comment',
+    'star_ratings',
+    'django_filters',
     # my apps
     'eshop_home.apps.HomePageConfig',
     'eshop_products.apps.EshopProductsConfig',
@@ -145,3 +147,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "static_cdn", "media_root")
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 AUTH_USER_MODEL = 'account.User'
+STAR_RATINGS_STAR_HEIGHT = 16
+STAR_RATINGS_ANONYMOUS = True

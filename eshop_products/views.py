@@ -1,3 +1,4 @@
+import django_filters
 from django.core.paginator import Paginator
 from django.http import Http404
 from django.shortcuts import render, redirect
@@ -22,11 +23,13 @@ def products_list(request, slug=None):
         category = get_object_or_404(ProductsCategory, slug=slug)
         products = models.ProductsList.objects.filter(categories=category)
     tag = Tag.objects.all()
+    filter = models.ProductFilter(request.GET, queryset=models.ProductsList.objects.all())
     context = {
         'products': products,
         'categories': categories,
         'tag': tag,
         'page_obj': page_obj,
+        'filter': filter,
     }
     return render(request, 'products_list/products_list.html', context)
 
@@ -96,3 +99,5 @@ class SearchProductsView(ListView):
             return models.ProductsList.objects.search(query)
 
         return models.ProductsList.objects.all()
+
+

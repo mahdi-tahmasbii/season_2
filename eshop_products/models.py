@@ -9,6 +9,7 @@ from comment.models import Comment
 import eshop_categories.models
 from eshop_categories.models import ProductsCategory
 from eshop_tags.models import Tag
+import django_filters
 
 
 # Create your models here.
@@ -92,6 +93,13 @@ class ProductsList(models.Model):
         return f"/products/{self.id}/{self.title.replace(' ', '-')}"
 
 
+class ProductFilter(django_filters.FilterSet):
+    class Meta:
+        model = ProductsList
+        fields = ['price']
+
+
+
 class ProductsGallery(models.Model):
     STATUS_CHOICES = (
         ('d', 'پیش‌نویس'),  # draft
@@ -107,7 +115,6 @@ class ProductsGallery(models.Model):
 
     def __str__(self):
         return self.title
-
 
 # class Comment(models.Model):
 #     product = models.ForeignKey(ProductsList, related_name='comments', on_delete=models.CASCADE)

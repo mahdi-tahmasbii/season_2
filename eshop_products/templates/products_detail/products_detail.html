@@ -1,6 +1,7 @@
 {% extends 'base/base.html' %}
 {% load static %}
 {% load comment_tags %}
+{% load ratings %}
 
 
 {% block content %}
@@ -94,18 +95,15 @@
 
                     <!-- Price Box Start -->
                     <div class="price-box mb-2">
-<!--                        <span class="old-price">${{ product.discount }}</span>-->
+                        <!--                        <span class="old-price">${{ product.discount }}</span>-->
                         <span class="regular-price"><del>${{ product.price }}</del></span>
                     </div>
                     <!-- Price Box End -->
 
                     <!-- Rating Start -->
-                    <span class="ratings justify-content-start">
-                                <span class="rating-wrap">
-                                    <span class="star" style="width: 100%"></span>
-                        </span>
-                        <span class="rating-num">(4)</span>
-                        </span>
+
+                    {% ratings product %}
+
                     <!-- Rating End -->
 
                     <!-- SKU Start -->
@@ -227,6 +225,7 @@
                         </div>
                     </div>
                     <div class="tab-pane fade active show" id="connect-2" role="tabpanel" aria-labelledby="profile-tab">
+                        <hr>
                         <!-- Start Single Content -->
                         {% if request.user.is_authenticated%}
                         {% render_comments product request %}

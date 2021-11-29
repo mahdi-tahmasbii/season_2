@@ -1,5 +1,6 @@
 {% extends 'base/base.html' %}
 {% load static %}
+{% load ratings %}
 
 {% block content %}
 <div class="section">
@@ -74,11 +75,8 @@
                                 <h4 class="sub-title"><a href="{{ product.get_absolute_url }}">{{ product.tag }}</a>
                                 </h4>
                                 <h5 class="title"><a href="{{ product.get_absolute_url }}">{{ product.title }}</a></h5>
-                                <!--                                <span class="ratings">-->
-                                <!--                                            <span class="rating-wrap">-->
-                                <!--                                                <span class="star" style="width: 100%"></span>-->
-                                <!--                                    </span>-->
-                                <!--                                    <span class="rating-num">(4)</span>-->
+
+                                {% ratings product %}
                                 </span>
                                 <p>{{ product.description | striptags}}</p>
                                 <span class="price">
