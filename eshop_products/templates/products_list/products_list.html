@@ -229,7 +229,7 @@
                                 {% for product in latest_products%}
                                 <div class="single-product-list product-hover mb-6">
                                     <div class="thumb">
-                                        <a href="single-product.html" class="image">
+                                        <a href="{{ product.get_absolute_url }}" class="image">
                                             <img class="first-image"
                                                  src="{{ product.image.url }}" alt="Product">
                                             <img class="second-image"
