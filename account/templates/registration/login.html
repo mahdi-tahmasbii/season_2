@@ -25,7 +25,11 @@
 <div class="section section-margin">
     <div class="container">
         <div class="row mb-n10">
-            <div class="col-md-8 text-center mx-auto">
+            <div class="col-lg-3 col-md-2 m-auto m-lg-0 pb-10">
+                <!-- Login Wrapper Start -->
+                <!-- Login Wrapper End -->
+            </div>
+            <div class="col-lg-6 col-md-8 m-auto m-lg-0 pb-10">
                 <!-- Login Wrapper Start -->
                 {% if form.non_field_errors %}
                 <div class="errors">
@@ -84,7 +88,7 @@
 
                         <!-- Lost Password & Creat New Account Start -->
                         <div class="lost-password">
-                            <a href="login-register.html">Creat Account</a>
+                            <a href="{% url 'account:register' %}">Creat Account</a>
                         </div>
                         <!-- Lost Password & Creat New Account End -->
 

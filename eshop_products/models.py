@@ -88,7 +88,8 @@ class ProductsList(models.Model):
     time = models.DateTimeField(auto_now_add=True)
     # the field name should be comments
     comments = GenericRelation(Comment)
-    hits = models.ManyToManyField(IPAddress, blank=True, related_name='hits')
+    hits = models.ManyToManyField(IPAddress, through="ProductHit", blank=True, related_name='hits')
+    crated = models.DateTimeField(auto_now_add=True)
     objects = ProductsManager()
 
     def __str__(self):
@@ -102,6 +103,12 @@ class ProductFilter(django_filters.FilterSet):
     class Meta:
         model = ProductsList
         fields = ['price']
+
+
+class ProductHit(models.Model):
+    product = models.ForeignKey(ProductsList, on_delete=models.CASCADE)
+    ip_address = models.ForeignKey(IPAddress, on_delete=models.CASCADE)
+    crated = models.DateTimeField(auto_now_add=True)
 
 
 class ProductsGallery(models.Model):
@@ -120,13 +127,3 @@ class ProductsGallery(models.Model):
     def __str__(self):
         return self.title
 
-# class Comment(models.Model):
-#     product = models.ForeignKey(ProductsList, related_name='comments', on_delete=models.CASCADE)
-#     name = models.CharField(max_length=200)
-#     title = models.CharField(max_length=200)
-#     message = models.TextField(max_length=200)
-#     date = models.DateTimeField(auto_now_add=True)
-#     email = models.EmailField(max_length=200)
-#
-#     def __str__(self):
-#         return f'{self.name}'

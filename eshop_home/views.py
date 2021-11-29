@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from eshop_categories.models import ProductsCategory
 from eshop_products import models
 # Create your views here.
 from django.views.generic import ListView
@@ -10,7 +11,10 @@ def home_page(request):
 
 
 def header_page(request):
-    context = {}
+    categories = ProductsCategory.objects.filter(is_sub=False)
+    context = {
+        'categories':categories
+    }
     return render(request, 'shared/header.html', context)
 
 

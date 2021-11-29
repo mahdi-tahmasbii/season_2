@@ -1,16 +1,33 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from .models import User
 from django.urls import reverse_lazy
-from django.views.generic.edit import DeleteView
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, UpdateView, DetailView, CreateView, DeleteView
 from eshop_products.models import ProductsList, ProductsGallery
 from django.urls import reverse
 from .mixins import FieldsMixin, FormValidMixin, FieldsGalleryMixin, AuthorAccessProductMixin, AuthorAccessGalleryMixin, \
     SuperuserAccessMixin
+from .forms import RegisterForm
 
 
 # Create your views here.
+
+
+def user_register(request):
+    if request.user.is_authenticated:
+        return redirect('/')
+    register_form = RegisterForm(request.POST or None)
+    if register_form.is_valid():
+        user_name = register_form.cleaned_data.get('user_name')
+        password = register_form.cleaned_data.get('password')
+        email = register_form.cleaned_data.get('email')
+        User.objects.create_user(username=user_name, email=email, password=password)
+        return redirect('account:login')
+    context = {
+        'register_form': register_form
+    }
+    return render(request, 'registration/register.html', context)
+
 
 class ProductList(LoginRequiredMixin, ListView):
     template_name = "registration/home.html"

@@ -10,11 +10,12 @@ from django.views.generic import ListView, DetailView, UpdateView, DeleteView
 from account.mixins import AuthorAccessProductMixin
 from django.contrib.auth.decorators import login_required
 from eshop_tags.models import Tag
+from django.db.models import Count
 
 
 # Create your views here.
 def products_list(request, slug=None):
-    products = models.ProductsList.objects.all()
+    products = models.ProductsList.objects.all()[:9]
     paginator = Paginator(products, 9)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
@@ -24,15 +25,15 @@ def products_list(request, slug=None):
         products = models.ProductsList.objects.filter(categories=category)
     tag = Tag.objects.all()
     filter = models.ProductFilter(request.GET, queryset=models.ProductsList.objects.all())
-
+    latest_products = models.ProductsList.objects.order_by('-id').all()[:3]
     context = {
         'products': products,
         'categories': categories,
         'tag': tag,
         'page_obj': page_obj,
         'filter': filter,
+        'latest_products': latest_products,
     }
-
 
     return render(request, 'products_list/products_list.html', context)
 
@@ -56,17 +57,7 @@ def products_detail(request, *args, **kwargs):
     selected_product_id = kwargs['productId']
     product: models.ProductsList = models.ProductsList.objects.get_by_id(selected_product_id)
     product_gallery = models.ProductsGallery.objects.filter(product_id=selected_product_id)
-    # comment = models.Comment.objects.all().filter(product_id=selected_product_id)
-    #
-    # if request.method == "POST":
-    #     form = forms.CommentForm(request.POST)
-    #     if form.is_valid():
-    #         name = form.cleaned_data.get('name')
-    #         email = form.cleaned_data.get('email')
-    #         message = form.cleaned_data.get('message')
-    #         new_comment = models.Comment(product=product, name=name, email=email, message=message)
-    #         new_comment.save()
-    #         return redirect('/products')
+    related_products = models.ProductsList.objects.get_queryset().filter(categories__products=product).distinct()
     ip_address = request.user.ip_address
     if ip_address not in product.hits.all():
         product.hits.add(ip_address)
@@ -74,7 +65,7 @@ def products_detail(request, *args, **kwargs):
     context = {
         'product': product,
         'gallery': product_gallery,
-        # 'comment': comment,
+        'related_products': related_products,
 
     }
     return render(request, 'products_detail/products_detail.html', context)

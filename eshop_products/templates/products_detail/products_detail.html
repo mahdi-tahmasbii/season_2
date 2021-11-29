@@ -11,7 +11,7 @@
     <div class="breadcrumb-area bg-light">
         <div class="container-fluid">
             <div class="breadcrumb-content text-center">
-                <h1 class="title">Product Detail</h1>
+                <h1 class="title">{{ product.title }}</h1>
                 <ul>
                     <li>
                         <a href="index.html">Shop </a>
@@ -32,18 +32,17 @@
 
                 <!-- Product Details Image Start -->
                 <div class="product-details-img">
-
                     <!-- Single Product Image Start -->
                     <div class="single-product-img swiper-container gallery-top swiper-container-initialized swiper-container-horizontal">
                         <div class="swiper-wrapper popup-gallery" id="swiper-wrapper-43abea5ceccbc9f10"
                              aria-live="polite"
                              style="transform: translate3d(-380px, 0px, 0px); transition: all 0ms ease 0s;">
                             {% for image in gallery %}
-
                             <a class="swiper-slide w-100 swiper-slide-active"
                                href="{{ image.image.url }}" data-swiper-slide-index="0"
                                role="group" aria-label="2 / 8" style="width: 370px; margin-right: 10px;">
-                                <img class="w-100" src="{{ image.image.url }}" alt="Product">
+                                <img class="w-100" src="{{ image.image.url }}" alt="Product"
+                                     style="width:250px;height:300px">
                             </a>
                             {% endfor %}
                         </div>
@@ -57,12 +56,10 @@
                         <div class="swiper-wrapper" id="swiper-wrapper-b37b89c6f79483f7" aria-live="polite"
                              style="transform: translate3d(0px, 0px, 0px); transition: all 0ms ease 0s;">
                             {% for image in gallery %}
-
                             <div class="swiper-slide swiper-slide-visible" role="group" aria-label="3 / 6"
                                  style="width: 116.667px; margin-right: 10px;">
-                                <img src="{{ image.image.url }}" alt="Product">
+                                <img src="{{ image.image.url }}" alt="Product" style="width:110px;height:80px">
                             </div>
-
                             {% endfor %}
                         </div>
 
@@ -103,9 +100,10 @@
                     <!-- Rating Start -->
 
                     {% ratings product %}
-
-                    <!-- Rating End -->
-
+                        <!-- Rating End -->
+                    <div class="price-box mb-2">
+                        <span ><del>{{ product.description | safe}}</del></span>
+                    </div>
                     <!-- SKU Start -->
                     <div class="sku mb-3">
                         <p class="desc-content mb-5">{{ product.made_in }}</p>
@@ -139,7 +137,7 @@
                         <!-- Product Metarial Start -->
                         <div class="product-metarial">
                             <span>Material :</span>
-                            <a href=""><strong>{{ product.material }}</strong></a>
+                            <strong>{{ product.Materials }}</strong>
                         </div>
                         <!-- Product Metarial End -->
                     </div>
@@ -163,8 +161,7 @@
                             <a class="btn btn-outline-dark btn-hover-primary" href="cart.html">Add to cart</a>
                         </div>
                         <div class="add-to-wishlist">
-                            <a class="btn btn-outline-dark btn-hover-primary" href="wishlist.html">Add to
-                                Wishlist</a>
+                            <a class="btn btn-outline-dark btn-hover-primary" href="{% url 'eshop_products:products_list' %}">Shop</a>
                         </div>
                     </div>
                     <!-- Cart & Wishlist Button End -->
@@ -337,507 +334,73 @@
                     <div class="swiper-container swiper-container-initialized swiper-container-horizontal">
                         <div class="swiper-wrapper" id="swiper-wrapper-1f6bdcb44dc8ed29" aria-live="polite"
                              style="transform: translate3d(-1280px, 0px, 0px); transition: all 0ms ease 0s;">
-                            <div class="swiper-slide product-wrapper swiper-slide-duplicate swiper-slide-duplicate-next"
-                                 role="group" aria-label="7 / 13" style="width: 320px;" data-swiper-slide-index="2">
 
-                                <!-- Single Product Start -->
-                                <div class="product product-border-left aos-init aos-animate" data-aos="fade-up"
-                                     data-aos-delay="500">
-                                    <div class="thumb">
-                                        <a href="single-product.html" class="image">
-                                            <img class="first-image" src="assets/images/products/medium-size/7.jpg"
-                                                 alt="Product">
-                                            <img class="second-image" src="assets/images/products/medium-size/9.jpg"
-                                                 alt="Product">
-                                        </a>
-                                        <div class="actions">
-                                            <a href="#" class="action wishlist"><i class="pe-7s-like"></i></a>
-                                            <a href="#" class="action quickview" data-bs-toggle="modal"
-                                               data-bs-target="#exampleModalCenter"><i class="pe-7s-search"></i></a>
-                                            <a href="#" class="action compare"><i class="pe-7s-shuffle"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="content">
-                                        <h4 class="sub-title"><a href="single-product.html">Lather Design</a></h4>
-                                        <h5 class="title"><a href="single-product.html">Basic Lather Sneaker</a>
-                                        </h5>
-                                        <span class="ratings">
-                                                    <span class="rating-wrap">
-                                                        <span class="star" style="width: 100%"></span>
-                                            </span>
-                                            <span class="rating-num">(12)</span>
-                                            </span>
-                                        <span class="price">
-                                                    <span class="new">$65.00</span>
-                                            </span>
-                                        <button class="btn btn-sm btn-outline-dark btn-hover-primary">Add To Cart
-                                        </button>
-                                    </div>
+
+                            <!-- Single Product Start -->
+                            {% for product in related_products%}
+                            <div class="product product-border-left aos-init aos-animate" data-aos="fade-up"
+                                 data-aos-delay="300">
+                                <div class="thumb">
+                                    <a href="{{ product.get_absolute_url }}" class="image" style="width:300px">
+                                        <img class="first-image" src="{{ product.image.url }}"
+                                             alt="Product">
+                                        <img class="second-image" src="{{ product.image.url }}"
+                                             alt="Product">
+                                    </a>
+
                                 </div>
-                                <!-- Single Product End -->
+                                <div class="content">
+                                    <h4 ><a href="{{ product.get_absolute_url }}">
+                                        {{ product.description | striptags }}</a></h4>
+                                    <h5 class="title"><a href="{{ product.get_absolute_url }}">{{ product.title }}</a>
+                                    </h5>
+                                    {% ratings product %}
+                                    <span class="price">
+                                                    <span class="new">${{ product.price }}</span>
+                                        <!--                                            <span class="old">$42.85</span>-->
+                                            </span>
+                                    <a href="{{ product.get_absolute_url }}"
+                                       class="btn btn-lg btn-outline-dark btn-hover-primary">See More</a>
 
-                            </div>
-                            <div class="swiper-slide product-wrapper swiper-slide-duplicate" role="group"
-                                 aria-label="8 / 13" style="width: 320px;" data-swiper-slide-index="3">
-
-                                <!-- Single Product Start -->
-                                <div class="product product-border-left aos-init aos-animate" data-aos="fade-up"
-                                     data-aos-delay="600">
-                                    <div class="thumb">
-                                        <a href="single-product.html" class="image">
-                                            <img class="first-image" src="assets/images/products/medium-size/11.jpg"
-                                                 alt="Product">
-                                            <img class="second-image"
-                                                 src="assets/images/products/medium-size/10.jpg" alt="Product">
-                                        </a>
-                                        <div class="actions">
-                                            <a href="#" class="action wishlist"><i class="pe-7s-like"></i></a>
-                                            <a href="#" class="action quickview" data-bs-toggle="modal"
-                                               data-bs-target="#exampleModalCenter"><i class="pe-7s-search"></i></a>
-                                            <a href="#" class="action compare"><i class="pe-7s-shuffle"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="content">
-                                        <h4 class="sub-title"><a href="single-product.html">Design Source</a></h4>
-                                        <h5 class="title"><a href="single-product.html">Handmade Shoulder Bag</a>
-                                        </h5>
-                                        <span class="ratings">
-                                                    <span class="rating-wrap">
-                                                        <span class="star" style="width: 100%"></span>
-                                            </span>
-                                            <span class="rating-num">(06)</span>
-                                            </span>
-                                        <span class="price">
-                                                    <span class="new">$96.50</span>
-                                            <span class="old">$100.00</span>
-                                            </span>
-                                        <button class="btn btn-sm btn-outline-dark btn-hover-primary">Add To Cart
-                                        </button>
-                                    </div>
                                 </div>
-                                <!-- Single Product End -->
-
                             </div>
-                            <div class="swiper-slide product-wrapper swiper-slide-duplicate" role="group"
-                                 aria-label="9 / 13" style="width: 320px;" data-swiper-slide-index="4">
+                            {% endfor %}
+                            <!-- Single Product End -->
 
-                                <!-- Single Product Start -->
-                                <div class="product product-border-left aos-init aos-animate" data-aos="fade-up"
-                                     data-aos-delay="700">
-                                    <div class="thumb">
-                                        <a href="single-product.html" class="image">
-                                            <img class="first-image" src="assets/images/products/medium-size/7.jpg"
-                                                 alt="Product">
-                                            <img class="second-image" src="assets/images/products/medium-size/9.jpg"
-                                                 alt="Product">
-                                        </a>
-                                        <div class="actions">
-                                            <a href="#" class="action wishlist"><i class="pe-7s-like"></i></a>
-                                            <a href="#" class="action quickview" data-bs-toggle="modal"
-                                               data-bs-target="#exampleModalCenter"><i class="pe-7s-search"></i></a>
-                                            <a href="#" class="action compare"><i class="pe-7s-shuffle"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="content">
-                                        <h4 class="sub-title"><a href="single-product.html">Lather Design</a></h4>
-                                        <h5 class="title"><a href="single-product.html">Basic Lather Sneaker</a>
-                                        </h5>
-                                        <span class="ratings">
-                                                    <span class="rating-wrap">
-                                                        <span class="star" style="width: 100%"></span>
-                                            </span>
-                                            <span class="rating-num">(12)</span>
-                                            </span>
-                                        <span class="price">
-                                                    <span class="new">$65.00</span>
-                                            </span>
-                                        <button class="btn btn-sm btn-outline-dark btn-hover-primary">Add To Cart
-                                        </button>
-                                    </div>
-                                </div>
-                                <!-- Single Product End -->
-
-                            </div>
-
-                            <!-- Product Start -->
-                            <div class="swiper-slide product-wrapper swiper-slide-prev" role="group"
-                                 aria-label="5 / 13" style="width: 320px;" data-swiper-slide-index="0">
-
-                                <!-- Single Product Start -->
-                                <div class="product product-border-left aos-init aos-animate" data-aos="fade-up"
-                                     data-aos-delay="300">
-                                    <div class="thumb">
-                                        <a href="single-product.html" class="image">
-                                            <img class="first-image" src="assets/images/products/medium-size/1.jpg"
-                                                 alt="Product">
-                                            <img class="second-image" src="assets/images/products/medium-size/5.jpg"
-                                                 alt="Product">
-                                        </a>
-                                        <div class="actions">
-                                            <a href="#" class="action wishlist"><i class="pe-7s-like"></i></a>
-                                            <a href="#" class="action quickview" data-bs-toggle="modal"
-                                               data-bs-target="#exampleModalCenter"><i class="pe-7s-search"></i></a>
-                                            <a href="#" class="action compare"><i class="pe-7s-shuffle"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="content">
-                                        <h4 class="sub-title"><a href="single-product.html">Studio Design</a></h4>
-                                        <h5 class="title"><a href="single-product.html">Brother Hoddies in Grey</a>
-                                        </h5>
-                                        <span class="ratings">
-                                                    <span class="rating-wrap">
-                                                        <span class="star" style="width: 100%"></span>
-                                            </span>
-                                            <span class="rating-num">(4)</span>
-                                            </span>
-                                        <span class="price">
-                                                    <span class="new">$38.50</span>
-                                            <span class="old">$42.85</span>
-                                            </span>
-                                        <button class="btn btn-sm btn-outline-dark btn-hover-primary">Add To Cart
-                                        </button>
-                                    </div>
-                                </div>
-                                <!-- Single Product End -->
-
-                            </div>
-                            <!-- Product End -->
-
-                            <!-- Product Start -->
-                            <div class="swiper-slide product-wrapper swiper-slide-active" role="group"
-                                 aria-label="6 / 13" style="width: 320px;" data-swiper-slide-index="1">
-
-                                <!-- Single Product Start -->
-                                <div class="product product-border-left aos-init aos-animate" data-aos="fade-up"
-                                     data-aos-delay="400">
-                                    <div class="thumb">
-                                        <a href="single-product.html" class="image">
-                                            <img class="first-image" src="assets/images/products/medium-size/4.jpg"
-                                                 alt="Product">
-                                            <img class="second-image"
-                                                 src="assets/images/products/medium-size/10.jpg" alt="Product">
-                                        </a>
-                                        <span class="badges">
-                                                    <span class="sale">New</span>
-                                            </span>
-                                        <div class="actions">
-                                            <a href="#" class="action wishlist"><i class="pe-7s-like"></i></a>
-                                            <a href="#" class="action quickview" data-bs-toggle="modal"
-                                               data-bs-target="#exampleModalCenter"><i class="pe-7s-search"></i></a>
-                                            <a href="#" class="action compare"><i class="pe-7s-shuffle"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="content">
-                                        <h4 class="sub-title"><a href="single-product.html">Studio Design</a></h4>
-                                        <h5 class="title"><a href="single-product.html">Simple Woven Fabrics</a>
-                                        </h5>
-                                        <span class="ratings">
-                                                    <span class="rating-wrap">
-                                                        <span class="star" style="width: 67%"></span>
-                                            </span>
-                                            <span class="rating-num">(2)</span>
-                                            </span>
-                                        <span class="price">
-                                                    <span class="new">$45.50</span>
-                                            <span class="old">$48.85</span>
-                                            </span>
-                                        <button class="btn btn-sm btn-outline-dark btn-hover-primary">Add To Cart
-                                        </button>
-                                    </div>
-                                </div>
-                                <!-- Single Product End -->
-
-                            </div>
-                            <!-- Product End -->
-
-                            <!-- Product Start -->
-                            <div class="swiper-slide product-wrapper swiper-slide-next" role="group"
-                                 aria-label="7 / 13" style="width: 320px;" data-swiper-slide-index="2">
-
-                                <!-- Single Product Start -->
-                                <div class="product product-border-left aos-init aos-animate" data-aos="fade-up"
-                                     data-aos-delay="500">
-                                    <div class="thumb">
-                                        <a href="single-product.html" class="image">
-                                            <img class="first-image" src="assets/images/products/medium-size/7.jpg"
-                                                 alt="Product">
-                                            <img class="second-image" src="assets/images/products/medium-size/9.jpg"
-                                                 alt="Product">
-                                        </a>
-                                        <div class="actions">
-                                            <a href="#" class="action wishlist"><i class="pe-7s-like"></i></a>
-                                            <a href="#" class="action quickview" data-bs-toggle="modal"
-                                               data-bs-target="#exampleModalCenter"><i class="pe-7s-search"></i></a>
-                                            <a href="#" class="action compare"><i class="pe-7s-shuffle"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="content">
-                                        <h4 class="sub-title"><a href="single-product.html">Lather Design</a></h4>
-                                        <h5 class="title"><a href="single-product.html">Basic Lather Sneaker</a>
-                                        </h5>
-                                        <span class="ratings">
-                                                    <span class="rating-wrap">
-                                                        <span class="star" style="width: 100%"></span>
-                                            </span>
-                                            <span class="rating-num">(12)</span>
-                                            </span>
-                                        <span class="price">
-                                                    <span class="new">$65.00</span>
-                                            </span>
-                                        <button class="btn btn-sm btn-outline-dark btn-hover-primary">Add To Cart
-                                        </button>
-                                    </div>
-                                </div>
-                                <!-- Single Product End -->
-
-                            </div>
-                            <!-- Product End -->
-
-                            <!-- Product Start -->
-                            <div class="swiper-slide product-wrapper" role="group" aria-label="8 / 13"
-                                 style="width: 320px;" data-swiper-slide-index="3">
-
-                                <!-- Single Product Start -->
-                                <div class="product product-border-left aos-init aos-animate" data-aos="fade-up"
-                                     data-aos-delay="600">
-                                    <div class="thumb">
-                                        <a href="single-product.html" class="image">
-                                            <img class="first-image" src="assets/images/products/medium-size/11.jpg"
-                                                 alt="Product">
-                                            <img class="second-image"
-                                                 src="assets/images/products/medium-size/10.jpg" alt="Product">
-                                        </a>
-                                        <div class="actions">
-                                            <a href="#" class="action wishlist"><i class="pe-7s-like"></i></a>
-                                            <a href="#" class="action quickview" data-bs-toggle="modal"
-                                               data-bs-target="#exampleModalCenter"><i class="pe-7s-search"></i></a>
-                                            <a href="#" class="action compare"><i class="pe-7s-shuffle"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="content">
-                                        <h4 class="sub-title"><a href="single-product.html">Design Source</a></h4>
-                                        <h5 class="title"><a href="single-product.html">Handmade Shoulder Bag</a>
-                                        </h5>
-                                        <span class="ratings">
-                                                    <span class="rating-wrap">
-                                                        <span class="star" style="width: 100%"></span>
-                                            </span>
-                                            <span class="rating-num">(06)</span>
-                                            </span>
-                                        <span class="price">
-                                                    <span class="new">$96.50</span>
-                                            <span class="old">$100.00</span>
-                                            </span>
-                                        <button class="btn btn-sm btn-outline-dark btn-hover-primary">Add To Cart
-                                        </button>
-                                    </div>
-                                </div>
-                                <!-- Single Product End -->
-
-                            </div>
-                            <!-- Product End -->
-
-                            <!-- Product Start -->
-                            <div class="swiper-slide product-wrapper" role="group" aria-label="9 / 13"
-                                 style="width: 320px;" data-swiper-slide-index="4">
-
-                                <!-- Single Product Start -->
-                                <div class="product product-border-left aos-init aos-animate" data-aos="fade-up"
-                                     data-aos-delay="700">
-                                    <div class="thumb">
-                                        <a href="single-product.html" class="image">
-                                            <img class="first-image" src="assets/images/products/medium-size/7.jpg"
-                                                 alt="Product">
-                                            <img class="second-image" src="assets/images/products/medium-size/9.jpg"
-                                                 alt="Product">
-                                        </a>
-                                        <div class="actions">
-                                            <a href="#" class="action wishlist"><i class="pe-7s-like"></i></a>
-                                            <a href="#" class="action quickview" data-bs-toggle="modal"
-                                               data-bs-target="#exampleModalCenter"><i class="pe-7s-search"></i></a>
-                                            <a href="#" class="action compare"><i class="pe-7s-shuffle"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="content">
-                                        <h4 class="sub-title"><a href="single-product.html">Lather Design</a></h4>
-                                        <h5 class="title"><a href="single-product.html">Basic Lather Sneaker</a>
-                                        </h5>
-                                        <span class="ratings">
-                                                    <span class="rating-wrap">
-                                                        <span class="star" style="width: 100%"></span>
-                                            </span>
-                                            <span class="rating-num">(12)</span>
-                                            </span>
-                                        <span class="price">
-                                                    <span class="new">$65.00</span>
-                                            </span>
-                                        <button class="btn btn-sm btn-outline-dark btn-hover-primary">Add To Cart
-                                        </button>
-                                    </div>
-                                </div>
-                                <!-- Single Product End -->
-
-                            </div>
-                            <!-- Product End -->
-
-                            <div class="swiper-slide product-wrapper swiper-slide-duplicate swiper-slide-duplicate-prev"
-                                 role="group" aria-label="5 / 13" style="width: 320px;" data-swiper-slide-index="0">
-
-                                <!-- Single Product Start -->
-                                <div class="product product-border-left aos-init aos-animate" data-aos="fade-up"
-                                     data-aos-delay="300">
-                                    <div class="thumb">
-                                        <a href="single-product.html" class="image">
-                                            <img class="first-image" src="assets/images/products/medium-size/1.jpg"
-                                                 alt="Product">
-                                            <img class="second-image" src="assets/images/products/medium-size/5.jpg"
-                                                 alt="Product">
-                                        </a>
-                                        <div class="actions">
-                                            <a href="#" class="action wishlist"><i class="pe-7s-like"></i></a>
-                                            <a href="#" class="action quickview" data-bs-toggle="modal"
-                                               data-bs-target="#exampleModalCenter"><i class="pe-7s-search"></i></a>
-                                            <a href="#" class="action compare"><i class="pe-7s-shuffle"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="content">
-                                        <h4 class="sub-title"><a href="single-product.html">Studio Design</a></h4>
-                                        <h5 class="title"><a href="single-product.html">Brother Hoddies in Grey</a>
-                                        </h5>
-                                        <span class="ratings">
-                                                    <span class="rating-wrap">
-                                                        <span class="star" style="width: 100%"></span>
-                                            </span>
-                                            <span class="rating-num">(4)</span>
-                                            </span>
-                                        <span class="price">
-                                                    <span class="new">$38.50</span>
-                                            <span class="old">$42.85</span>
-                                            </span>
-                                        <button class="btn btn-sm btn-outline-dark btn-hover-primary">Add To Cart
-                                        </button>
-                                    </div>
-                                </div>
-                                <!-- Single Product End -->
-
-                            </div>
-                            <div class="swiper-slide product-wrapper swiper-slide-duplicate swiper-slide-duplicate-active"
-                                 role="group" aria-label="6 / 13" style="width: 320px;" data-swiper-slide-index="1">
-
-                                <!-- Single Product Start -->
-                                <div class="product product-border-left aos-init aos-animate" data-aos="fade-up"
-                                     data-aos-delay="400">
-                                    <div class="thumb">
-                                        <a href="single-product.html" class="image">
-                                            <img class="first-image" src="assets/images/products/medium-size/4.jpg"
-                                                 alt="Product">
-                                            <img class="second-image"
-                                                 src="assets/images/products/medium-size/10.jpg" alt="Product">
-                                        </a>
-                                        <span class="badges">
-                                                    <span class="sale">New</span>
-                                            </span>
-                                        <div class="actions">
-                                            <a href="#" class="action wishlist"><i class="pe-7s-like"></i></a>
-                                            <a href="#" class="action quickview" data-bs-toggle="modal"
-                                               data-bs-target="#exampleModalCenter"><i class="pe-7s-search"></i></a>
-                                            <a href="#" class="action compare"><i class="pe-7s-shuffle"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="content">
-                                        <h4 class="sub-title"><a href="single-product.html">Studio Design</a></h4>
-                                        <h5 class="title"><a href="single-product.html">Simple Woven Fabrics</a>
-                                        </h5>
-                                        <span class="ratings">
-                                                    <span class="rating-wrap">
-                                                        <span class="star" style="width: 67%"></span>
-                                            </span>
-                                            <span class="rating-num">(2)</span>
-                                            </span>
-                                        <span class="price">
-                                                    <span class="new">$45.50</span>
-                                            <span class="old">$48.85</span>
-                                            </span>
-                                        <button class="btn btn-sm btn-outline-dark btn-hover-primary">Add To Cart
-                                        </button>
-                                    </div>
-                                </div>
-                                <!-- Single Product End -->
-
-                            </div>
-                            <div class="swiper-slide product-wrapper swiper-slide-duplicate swiper-slide-duplicate-next"
-                                 role="group" aria-label="7 / 13" style="width: 320px;" data-swiper-slide-index="2">
-
-                                <!-- Single Product Start -->
-                                <div class="product product-border-left aos-init aos-animate" data-aos="fade-up"
-                                     data-aos-delay="500">
-                                    <div class="thumb">
-                                        <a href="single-product.html" class="image">
-                                            <img class="first-image" src="assets/images/products/medium-size/7.jpg"
-                                                 alt="Product">
-                                            <img class="second-image" src="assets/images/products/medium-size/9.jpg"
-                                                 alt="Product">
-                                        </a>
-                                        <div class="actions">
-                                            <a href="#" class="action wishlist"><i class="pe-7s-like"></i></a>
-                                            <a href="#" class="action quickview" data-bs-toggle="modal"
-                                               data-bs-target="#exampleModalCenter"><i class="pe-7s-search"></i></a>
-                                            <a href="#" class="action compare"><i class="pe-7s-shuffle"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="content">
-                                        <h4 class="sub-title"><a href="single-product.html">Lather Design</a></h4>
-                                        <h5 class="title"><a href="single-product.html">Basic Lather Sneaker</a>
-                                        </h5>
-                                        <span class="ratings">
-                                                    <span class="rating-wrap">
-                                                        <span class="star" style="width: 100%"></span>
-                                            </span>
-                                            <span class="rating-num">(12)</span>
-                                            </span>
-                                        <span class="price">
-                                                    <span class="new">$65.00</span>
-                                            </span>
-                                        <button class="btn btn-sm btn-outline-dark btn-hover-primary">Add To Cart
-                                        </button>
-                                    </div>
-                                </div>
-                                <!-- Single Product End -->
-
-                            </div>
                         </div>
+                    </div>
 
-                        <!-- Swiper Pagination Start -->
-                        <div class="swiper-pagination d-md-none swiper-pagination-clickable swiper-pagination-bullets">
+                    <!-- Swiper Pagination Start -->
+                    <div class="swiper-pagination d-md-none swiper-pagination-clickable swiper-pagination-bullets">
                                 <span class="swiper-pagination-bullet" tabindex="0" role="button"
                                       aria-label="Go to slide 1"></span><span
-                                class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0"
-                                role="button" aria-label="Go to slide 2"></span><span
-                                class="swiper-pagination-bullet" tabindex="0" role="button"
-                                aria-label="Go to slide 3"></span><span class="swiper-pagination-bullet"
-                                                                        tabindex="0" role="button"
-                                                                        aria-label="Go to slide 4"></span><span
-                                class="swiper-pagination-bullet" tabindex="0" role="button"
-                                aria-label="Go to slide 5"></span></div>
-                        <!-- Swiper Pagination End -->
+                            class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0"
+                            role="button" aria-label="Go to slide 2"></span><span
+                            class="swiper-pagination-bullet" tabindex="0" role="button"
+                            aria-label="Go to slide 3"></span><span class="swiper-pagination-bullet"
+                                                                    tabindex="0" role="button"
+                                                                    aria-label="Go to slide 4"></span><span
+                            class="swiper-pagination-bullet" tabindex="0" role="button"
+                            aria-label="Go to slide 5"></span></div>
+                    <!-- Swiper Pagination End -->
 
-                        <!-- Next Previous Button Start -->
-                        <div class="swiper-product-button-next swiper-button-next swiper-button-white d-md-flex d-none"
-                             tabindex="0" role="button" aria-label="Next slide"
-                             aria-controls="swiper-wrapper-1f6bdcb44dc8ed29"><i class="pe-7s-angle-right"></i></div>
-                        <div class="swiper-product-button-prev swiper-button-prev swiper-button-white d-md-flex d-none"
-                             tabindex="0" role="button" aria-label="Previous slide"
-                             aria-controls="swiper-wrapper-1f6bdcb44dc8ed29"><i class="pe-7s-angle-left"></i></div>
-                        <!-- Next Previous Button End -->
+                    <!-- Next Previous Button Start -->
+                    <div class="swiper-product-button-next swiper-button-next swiper-button-white d-md-flex d-none"
+                         tabindex="0" role="button" aria-label="Next slide"
+                         aria-controls="swiper-wrapper-1f6bdcb44dc8ed29"><i class="pe-7s-angle-right"></i></div>
+                    <div class="swiper-product-button-prev swiper-button-prev swiper-button-white d-md-flex d-none"
+                         tabindex="0" role="button" aria-label="Previous slide"
+                         aria-controls="swiper-wrapper-1f6bdcb44dc8ed29"><i class="pe-7s-angle-left"></i></div>
+                    <!-- Next Previous Button End -->
 
-                        <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
+                    <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
 
-                </div>
             </div>
-
         </div>
-        <!-- Products End -->
 
     </div>
+    <!-- Products End -->
+
+</div>
 </div>
 {% endblock %}

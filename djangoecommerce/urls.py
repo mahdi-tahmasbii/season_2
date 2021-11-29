@@ -19,6 +19,7 @@ from djangoecommerce import settings
 from django.contrib import admin
 from django.urls import path, include, re_path
 
+
 urlpatterns = [
     path('', include('eshop_home.urls')),
     path('', include('eshop_products.urls')),
@@ -26,6 +27,7 @@ urlpatterns = [
     re_path(r'^ratings/', include('star_ratings.urls', namespace='ratings')),
     path('account/', include('account.urls')),
     path('admin/', admin.site.urls),
+
 ]
 
 if settings.DEBUG:
