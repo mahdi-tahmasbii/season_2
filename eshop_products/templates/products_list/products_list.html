@@ -72,8 +72,7 @@
                                 </a>
                             </div>
                             <div class="content">
-                                <h4 class="sub-title"><a href="{{ product.get_absolute_url }}">{{ product.tag }}</a>
-                                </h4>
+
                                 <h5 class="title"><a href="{{ product.get_absolute_url }}">{{ product.title }}</a></h5>
 
                                 {% ratings product %}
@@ -87,9 +86,12 @@
                                     <!--                                    <a title="Wishlist" href="#"-->
                                     <!--                                       class="btn btn-sm btn-outline-dark btn-hover-primary wishlist"><i-->
                                     <!--                                            class="fa fa-heart"></i></a>-->
-                                    <button class="btn btn-lg btn-outline-dark btn-hover-primary"
+                                    <button class="btn btn-sm btn-outline-dark btn-hover-primary"
                                     ><a href="{{ product.get_absolute_url }}">See More</a>
                                     </button>
+                                    <span>
+                                        <h>View Count :{{ product.hits.count }}</h>
+                                    </span>
                                     <!--                                    <a title="Compare" href="#"-->
                                     <!--                                       class="btn btn-sm btn-outline-dark btn-hover-primary compare"><i-->
                                     <!--                                            class="fa fa-random"></i></a>-->

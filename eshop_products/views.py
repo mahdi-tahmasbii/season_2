@@ -24,6 +24,7 @@ def products_list(request, slug=None):
         products = models.ProductsList.objects.filter(categories=category)
     tag = Tag.objects.all()
     filter = models.ProductFilter(request.GET, queryset=models.ProductsList.objects.all())
+
     context = {
         'products': products,
         'categories': categories,
@@ -31,6 +32,8 @@ def products_list(request, slug=None):
         'page_obj': page_obj,
         'filter': filter,
     }
+
+
     return render(request, 'products_list/products_list.html', context)
 
 
@@ -64,6 +67,10 @@ def products_detail(request, *args, **kwargs):
     #         new_comment = models.Comment(product=product, name=name, email=email, message=message)
     #         new_comment.save()
     #         return redirect('/products')
+    ip_address = request.user.ip_address
+    if ip_address not in product.hits.all():
+        product.hits.add(ip_address)
+
     context = {
         'product': product,
         'gallery': product_gallery,
@@ -99,5 +106,3 @@ class SearchProductsView(ListView):
             return models.ProductsList.objects.search(query)
 
         return models.ProductsList.objects.all()
-
-

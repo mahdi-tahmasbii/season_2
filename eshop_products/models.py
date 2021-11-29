@@ -54,6 +54,10 @@ class ProductsManager(models.Manager):
         return self.get_queryset().filter(lookup, status='p').distinct()
 
 
+class IPAddress(models.Model):
+    ip_address = models.GenericIPAddressField()
+
+
 class ProductsList(models.Model):
     STATUS_CHOICES = (
         ('d', 'پیش‌نویس'),  # draft
@@ -84,6 +88,7 @@ class ProductsList(models.Model):
     time = models.DateTimeField(auto_now_add=True)
     # the field name should be comments
     comments = GenericRelation(Comment)
+    hits = models.ManyToManyField(IPAddress, blank=True, related_name='hits')
     objects = ProductsManager()
 
     def __str__(self):
@@ -97,7 +102,6 @@ class ProductFilter(django_filters.FilterSet):
     class Meta:
         model = ProductsList
         fields = ['price']
-
 
 
 class ProductsGallery(models.Model):
