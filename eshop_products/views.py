@@ -1,3 +1,4 @@
+from django.core.paginator import Paginator
 from django.http import Http404
 from django.shortcuts import render, redirect
 from eshop_products import models
@@ -13,6 +14,9 @@ from eshop_tags.models import Tag
 # Create your views here.
 def products_list(request, slug=None):
     products = models.ProductsList.objects.all()
+    paginator = Paginator(products, 9)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
     categories = ProductsCategory.objects.filter(is_sub=False)
     if slug:
         category = get_object_or_404(ProductsCategory, slug=slug)
@@ -22,6 +26,7 @@ def products_list(request, slug=None):
         'products': products,
         'categories': categories,
         'tag': tag,
+        'page_obj': page_obj,
     }
     return render(request, 'products_list/products_list.html', context)
 
@@ -45,21 +50,21 @@ def products_detail(request, *args, **kwargs):
     selected_product_id = kwargs['productId']
     product: models.ProductsList = models.ProductsList.objects.get_by_id(selected_product_id)
     product_gallery = models.ProductsGallery.objects.filter(product_id=selected_product_id)
-    comment = models.Comment.objects.all().filter(product_id=selected_product_id)
-
-    if request.method == "POST":
-        form = forms.CommentForm(request.POST)
-        if form.is_valid():
-            name = form.cleaned_data.get('name')
-            email = form.cleaned_data.get('email')
-            message = form.cleaned_data.get('message')
-            new_comment = models.Comment(product=product, name=name, email=email, message=message)
-            new_comment.save()
-            return redirect('/products')
+    # comment = models.Comment.objects.all().filter(product_id=selected_product_id)
+    #
+    # if request.method == "POST":
+    #     form = forms.CommentForm(request.POST)
+    #     if form.is_valid():
+    #         name = form.cleaned_data.get('name')
+    #         email = form.cleaned_data.get('email')
+    #         message = form.cleaned_data.get('message')
+    #         new_comment = models.Comment(product=product, name=name, email=email, message=message)
+    #         new_comment.save()
+    #         return redirect('/products')
     context = {
         'product': product,
         'gallery': product_gallery,
-        'comment': comment,
+        # 'comment': comment,
 
     }
     return render(request, 'products_detail/products_detail.html', context)
@@ -77,3 +82,17 @@ def products_preview(request, pk):
         return render(request, 'products_detail/product_preview.html', context)
     else:
         raise Http404('Not For You')
+
+
+class SearchProductsView(ListView):
+    template_name = 'products_list/products_list.html'
+    paginate_by = 9
+    context_object_name = 'products'
+
+    def get_queryset(self):
+        request = self.request
+        query = request.GET.get('q')
+        if query is not None:
+            return models.ProductsList.objects.search(query)
+
+        return models.ProductsList.objects.all()

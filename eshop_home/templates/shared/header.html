@@ -340,9 +340,15 @@
             <!-- Button Close End -->
 
             <!-- Offcanvas Search Form Start -->
-            <form class="offcanvas-search-form" action="#">
-                <input type="text" placeholder="Search Product..." class="offcanvas-search-input">
-            </form>
+
+            <form class="offcanvas-search-form" action="/search" method="get">
+                                <h3 class="widget-title mb-4">Search</h3>
+                                <div class="search-box">
+                                    <input class="offcanvas-search-input" type="search" class="form-control" placeholder="Search Our Store"
+                                           aria-label="Search Our Store"
+                                           value="{{ request.q }}" name="q">
+                                </div>
+                            </form>
             <!-- Offcanvas Search Form End -->
 
         </div>

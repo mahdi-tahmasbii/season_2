@@ -6,4 +6,5 @@ urlpatterns = [
     path('', views.home_page, name="eshop_home"),
     path('header', views.header_page, name="header_page"),
     path('footer', views.footer_page, name="footer_page"),
+    path('psearch', views.SearchProductsView.as_view(), name='products-search'),
 ]

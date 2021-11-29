@@ -69,41 +69,32 @@
                                     <img class="second-image" src="{{ product.image.url }}"
                                          alt="Product">
                                 </a>
-                                <div class="actions">
-                                    <a href="wishlist.html" title="Wishlist" class="action wishlist"><i
-                                            class="pe-7s-like"></i></a>
-                                    <a href="#" title="Quickview" class="action quickview"
-                                       data-bs-toggle="modal"
-                                       data-bs-target="#exampleModalCenter"><i class="pe-7s-search"></i></a>
-                                    <a href="compare.html" title="Compare" class="action compare"><i
-                                            class="pe-7s-shuffle"></i></a>
-                                </div>
                             </div>
                             <div class="content">
                                 <h4 class="sub-title"><a href="{{ product.get_absolute_url }}">{{ product.tag }}</a>
                                 </h4>
                                 <h5 class="title"><a href="{{ product.get_absolute_url }}">{{ product.title }}</a></h5>
-                                <span class="ratings">
-                                            <span class="rating-wrap">
-                                                <span class="star" style="width: 100%"></span>
-                                    </span>
-                                    <span class="rating-num">(4)</span>
-                                    </span>
+                                <!--                                <span class="ratings">-->
+                                <!--                                            <span class="rating-wrap">-->
+                                <!--                                                <span class="star" style="width: 100%"></span>-->
+                                <!--                                    </span>-->
+                                <!--                                    <span class="rating-num">(4)</span>-->
+                                </span>
                                 <p>{{ product.description | striptags}}</p>
                                 <span class="price">
                                             <span class="new">${{ product.price }}</span>
-                                    <span class="old">$42.85</span>
+                                    <!--                                    <span class="old">$42.85</span>-->
                                     </span>
                                 <div class="shop-list-btn">
-                                    <a title="Wishlist" href="#"
-                                       class="btn btn-sm btn-outline-dark btn-hover-primary wishlist"><i
-                                            class="fa fa-heart"></i></a>
-                                    <button class="btn btn-sm btn-outline-dark btn-hover-primary"
-                                            title="Add To Cart">Add To Cart
+                                    <!--                                    <a title="Wishlist" href="#"-->
+                                    <!--                                       class="btn btn-sm btn-outline-dark btn-hover-primary wishlist"><i-->
+                                    <!--                                            class="fa fa-heart"></i></a>-->
+                                    <button class="btn btn-lg btn-outline-dark btn-hover-primary"
+                                    ><a href="{{ product.get_absolute_url }}">See More</a>
                                     </button>
-                                    <a title="Compare" href="#"
-                                       class="btn btn-sm btn-outline-dark btn-hover-primary compare"><i
-                                            class="fa fa-random"></i></a>
+                                    <!--                                    <a title="Compare" href="#"-->
+                                    <!--                                       class="btn btn-sm btn-outline-dark btn-hover-primary compare"><i-->
+                                    <!--                                            class="fa fa-random"></i></a>-->
                                 </div>
                             </div>
                         </div>
@@ -119,28 +110,7 @@
                 <div class="shop_toolbar_wrapper mt-10">
 
                     <!-- Shop Top Bar Left start -->
-                    <div class="shop-top-bar-left">
-                        <div class="shop-short-by mr-4">
-                            <select class="nice-select rounded-0" aria-label=".form-select-sm example"
-                                    style="display: none;">
-                                <option selected="">Show 12 Per Page</option>
-                                <option value="1">Show 12 Per Page</option>
-                                <option value="2">Show 24 Per Page</option>
-                                <option value="3">Show 15 Per Page</option>
-                                <option value="3">Show 30 Per Page</option>
-                            </select>
-                            <div class="nice-select rounded-0" tabindex="0"><span
-                                    class="current">Show 12 Per Page</span>
-                                <ul class="list">
-                                    <li data-value="Show 12 Per Page" class="option selected">Show 12 Per Page</li>
-                                    <li data-value="1" class="option">Show 12 Per Page</li>
-                                    <li data-value="2" class="option">Show 24 Per Page</li>
-                                    <li data-value="3" class="option">Show 15 Per Page</li>
-                                    <li data-value="3" class="option">Show 30 Per Page</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+
                     <!-- Shop Top Bar Left end -->
 
                     <!-- Shopt Top Bar Right Start -->
@@ -148,17 +118,21 @@
                         <nav>
                             <ul class="pagination">
                                 <li class="page-item disabled">
-                                    <a class="page-link" href="#" aria-label="Previous">
-                                        <span aria-hidden="true">«</span>
-                                    </a>
-                                </li>
-                                <li class="page-item"><a class="page-link active" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Next">
-                                        <span aria-hidden="true">»</span>
-                                    </a>
+                                    {% if page_obj.has_previous %}
+                                    <a class="btn btn-primary" href="?page=1">&laquo; first</a>
+                                    <a href="?page={{ page_obj.previous_page_number }}"
+                                       class="btn btn-primary">previous</a>
+                                    {% endif %}
+
+                                    <span class="current btn btn-primary">
+                                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+                                    </span>
+
+                                    {% if page_obj.has_next %}
+                                    <a href="?page={{ page_obj.next_page_number }}" class="btn btn-primary">next</a>
+                                    <a href="?page={{ page_obj.paginator.num_pages }}" class="btn btn-primary">last
+                                        &raquo;</a>
+                                    {% endif %}
                                 </li>
                             </ul>
                         </nav>
@@ -174,14 +148,17 @@
                 <aside class="sidebar_widget mt-10 mt-lg-0">
                     <div class="widget_inner aos-init aos-animate" data-aos="fade-up" data-aos-delay="200">
                         <div class="widget-list mb-10">
-                            <h3 class="widget-title mb-4">Search</h3>
-                            <div class="search-box">
-                                <input type="text" class="form-control" placeholder="Search Our Store"
-                                       aria-label="Search Our Store">
-                                <button class="btn btn-dark btn-hover-primary" type="button">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </div>
+                            <form class="header__search-form" action="/search" method="get">
+                                <h3 class="widget-title mb-4">Search</h3>
+                                <div class="search-box">
+                                    <input type="search" class="form-control" placeholder="Search Our Store"
+                                           aria-label="Search Our Store"
+                                           value="{{ request.q }}" name="q">
+                                    <button class="btn btn-dark btn-hover-primary" type="submit">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </div>
+                            </form>
                         </div>
                         <div class="widget-list mb-10">
                             <h3 class="widget-title mb-4">Menu Categories</h3>
@@ -218,7 +195,7 @@
                                                                          class="ui-slider-handle ui-corner-all ui-state-default"
                                                                          style="left: 100%;"></span></div>
                                 <button class="slider-range-submit" type="submit">Filter</button>
-                                <input class="slider-range-amount" type="text" name="text" id="amount"> 
+                                <input class="slider-range-amount" type="text" name="text" id="amount">
                             </form>
                             <!-- Widget Menu End -->
                         </div>
@@ -230,9 +207,11 @@
                                     {% if color.is_color%}
                                     <li>
                                         <div class="custom-control custom-checkbox">
-                                            <a href="{% url 'eshop_products:products_tag' color.slug %}">
-                                                {{ color.title }}
-                                            </a>
+                                            <button class="btn btn-sm btn-outline-dark btn-hover-danger">
+                                                <a href="{% url 'eshop_products:products_tag' color.slug %}">
+                                                    {{ color.title }}
+                                                </a>
+                                            </button>
                                         </div>
                                     </li>
                                     {% endif %}

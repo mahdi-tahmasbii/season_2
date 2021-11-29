@@ -4,7 +4,8 @@ from account.models import User
 from django.db import models
 from django.db.models import Q
 from autoslug import AutoSlugField
-
+from django.contrib.contenttypes.fields import GenericRelation
+from comment.models import Comment
 import eshop_categories.models
 from eshop_categories.models import ProductsCategory
 from eshop_tags.models import Tag
@@ -47,10 +48,9 @@ class ProductsManager(models.Manager):
     def search(self, query):
         lookup = (
                 Q(title__icontains=query) |
-                Q(description__icontains=query) |
-                Q(tag__icontains=query)
+                Q(description__icontains=query)
         )
-        return self.get_queryset().filter(lookup, active=True).distinct()
+        return self.get_queryset().filter(lookup, status='p').distinct()
 
 
 class ProductsList(models.Model):
@@ -81,6 +81,8 @@ class ProductsList(models.Model):
     offer = models.BooleanField(default=False, null=True, blank=True)
     our_suggestion = models.BooleanField(default=False, null=True, blank=True)
     time = models.DateTimeField(auto_now_add=True)
+    # the field name should be comments
+    comments = GenericRelation(Comment)
     objects = ProductsManager()
 
     def __str__(self):
@@ -107,13 +109,13 @@ class ProductsGallery(models.Model):
         return self.title
 
 
-class Comment(models.Model):
-    product = models.ForeignKey(ProductsList, related_name='comments', on_delete=models.CASCADE)
-    name = models.CharField(max_length=200)
-    title = models.CharField(max_length=200)
-    message = models.TextField(max_length=200)
-    date = models.DateTimeField(auto_now_add=True)
-    email = models.EmailField(max_length=200)
-
-    def __str__(self):
-        return f'{self.name}'
+# class Comment(models.Model):
+#     product = models.ForeignKey(ProductsList, related_name='comments', on_delete=models.CASCADE)
+#     name = models.CharField(max_length=200)
+#     title = models.CharField(max_length=200)
+#     message = models.TextField(max_length=200)
+#     date = models.DateTimeField(auto_now_add=True)
+#     email = models.EmailField(max_length=200)
+#
+#     def __str__(self):
+#         return f'{self.name}'

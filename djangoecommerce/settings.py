@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django_render_partial',
     'widget_tweaks',
     'crispy_forms',
+    'comment',
     # my apps
     'eshop_home.apps.HomePageConfig',
     'eshop_products.apps.EshopProductsConfig',
