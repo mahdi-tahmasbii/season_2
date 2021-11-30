@@ -7,7 +7,7 @@ from eshop_products.models import ProductsList, ProductsGallery
 from django.urls import reverse
 from .mixins import FieldsMixin, FormValidMixin, FieldsGalleryMixin, AuthorAccessProductMixin, AuthorAccessGalleryMixin, \
     SuperuserAccessMixin
-from .forms import RegisterForm
+from .forms import RegisterForm, ProfileForm
 
 
 # Create your views here.
@@ -99,3 +99,20 @@ class ProductGalleryDeleteView(LoginRequiredMixin, SuperuserAccessMixin, DeleteV
     model = ProductsGallery
     success_url = reverse_lazy('account:home')
     template_name = 'registration/productsgallery_confirm_delete.html'
+
+
+class Profile(LoginRequiredMixin, UpdateView):
+    model = User
+    template_name = "registration/profile.html"
+    form_class = ProfileForm
+    success_url = reverse_lazy("account:profile")
+
+    def get_object(self):
+        return User.objects.get(pk=self.request.user.pk)
+
+    def get_form_kwargs(self):
+        kwargs = super(Profile, self).get_form_kwargs()
+        kwargs.update({
+            'user': self.request.user
+        })
+        return kwargs

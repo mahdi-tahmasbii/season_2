@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'eshop_categories.apps.EshopCategoriesConfig',
     'eshop_tags.apps.EshopTagsConfig',
     'account.apps.AccountConfig',
+    'eshop_settings.apps.EshopSettingsConfig'
 
 ]
 

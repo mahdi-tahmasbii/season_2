@@ -1,0 +1,166 @@
+{% extends 'base/base.html'%}
+{% load static %}
+
+
+{% block content %}
+<div class="section">
+
+    <!-- Breadcrumb Area Start -->
+    <div class="breadcrumb-area bg-light">
+        <div class="container-fluid">
+            <div class="breadcrumb-content text-center">
+                <h1 class="title">Contact Us</h1>
+                <ul>
+                    <li>
+                        <a href="index.html">Home </a>
+                    </li>
+                    <li class="active"> Contact Us</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb Area End -->
+
+</div>
+<div class="section section-margin">
+    <div class="container">
+        <div class="row ">
+            <div class="col-12 col-lg-8     mb-10">
+                <!-- Section Title Start -->
+                <div class="section-title aos-init aos-animate" data-aos="fade-up" data-aos-delay="300">
+                    <h2 class="title pb-3">Get In Touch</h2>
+                    <span></span>
+                    <div class="title-border-bottom"></div>
+                </div>
+                <!-- Section Title End -->
+                <!-- Contact Form Wrapper Start -->
+                <div class="contact-form-wrapper contact-form">
+                    <div class="row">
+                        <form method="post" action="">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    Name{{ contact_form.full_name }}
+                                    {% for error in contact_form.full_name.errors %}
+                                    <p class="text-danger">{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                                <div class="form-group col-md-6">
+                                    Email {{ contact_form.email }}
+                                    {% for error in contact_form.email.errors %}
+                                    <p class="text-danger">{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <div class="form-group col-md-12">
+                                Subject{{ contact_form.subject }}
+                                {% for error in contact_form.subject.errors %}
+                                <p class="text-danger">{{ error }}</p>
+                                {% endfor %}
+                            </div>
+                            <div class="form-group col-md-12">
+                                Text {{ contact_form.text }}
+                                {% for error in contact_form.text.errors %}
+                                <p class="text-danger">{{ error }}</p>
+                                {% endfor %}
+                                <br>
+                                <div class="form-submit">
+                                    <input type="submit" name="submit" class="btn btn-primary pull-right" value="Send">
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                        </form>
+                        <p class="form-messege"></p>
+                    </div>
+                    <!-- Contact Form Wrapper End -->
+                </div>
+            </div>
+            <div class="col-12 col-lg-4 mb-10">
+                <!-- Section Title Start -->
+                <div class="section-title aos-init aos-animate" data-aos="fade-up" data-aos-delay="300">
+                    <h2 class="title pb-3">Contact Info</h2>
+                    <span></span>
+                    <div class="title-border-bottom"></div>
+                </div>
+                <!-- Section Title End -->
+
+                <!-- Contact Information Wrapper Start -->
+                <div class="row contact-info-wrapper mb-n6">
+
+                    <!-- Single Contact Information Start -->
+                    <div class="col-lg-12 col-md-6 col-sm-12 col-12 single-contact-info mb-6 aos-init aos-animate"
+                         data-aos="fade-up" data-aos-delay="300">
+
+                        <!-- Single Contact Icon Start -->
+                        <div class="single-contact-icon">
+                            <i class="fa fa-map-marker"></i>
+                        </div>
+                        <!-- Single Contact Icon End -->
+
+                        <!-- Single Contact Title Content Start -->
+                        <div class="single-contact-title-content">
+                            <h4 class="title">Postal Address</h4>
+                            <p class="desc-content">{{ contact_info.address }}</p>
+                        </div>
+                        <!-- Single Contact Title Content End -->
+
+                    </div>
+                    <!-- Single Contact Information End -->
+
+                    <!-- Single Contact Information Start -->
+                    <div class="col-lg-12 col-md-6 col-sm-12 col-12 single-contact-info mb-6 aos-init aos-animate"
+                         data-aos="fade-up" data-aos-delay="400">
+
+                        <!-- Single Contact Icon Start -->
+                        <div class="single-contact-icon">
+                            <i class="fa fa-mobile"></i>
+                        </div>
+                        <!-- Single Contact Icon End -->
+
+                        <!-- Single Contact Title Content Start -->
+                        <div class="single-contact-title-content">
+                            <h4 class="title">Contact Us Anytime</h4>
+                            <p class="desc-content">Mobile: {{ contact_info.mobile }}<br>Fax: {{ contact_info.fax }}</p>
+                        </div>
+                        <!-- Single Contact Title Content End -->
+
+                    </div>
+                    <!-- Single Contact Information End -->
+
+                    <!-- Single Contact Information Start -->
+                    <div class="col-lg-12 col-md-6 col-sm-12 col-12 single-contact-info mb-6 aos-init aos-animate"
+                         data-aos="fade-up" data-aos-delay="500">
+
+                        <!-- Single Contact Icon Start -->
+                        <div class="single-contact-icon">
+                            <i class="fa fa-envelope-o"></i>
+                        </div>
+                        <!-- Single Contact Icon End -->
+
+                        <!-- Single Contact Title Content Start -->
+                        <div class="single-contact-title-content">
+                            <h4 class="title">Support Overall</h4>
+                            <p class="desc-content"><a href="#">{{ contact_info.email }}</a> <br><a href="#">Mobile: {{
+                                contact_info.mobile }}</a>
+                            </p>
+                        </div>
+                        <!-- Single Contact Title Content End -->
+
+                    </div>
+                    <!-- Single Contact Information End -->
+
+                </div>
+                <!-- Contact Information Wrapper End -->
+            </div>
+        </div>
+    </div>
+</div>
+<div class="section aos-init aos-animate" data-aos="fade-up" data-aos-delay="300">
+    <!-- Google Map Area Start -->
+    <div class="google-map-area w-100">
+        <iframe class="contact-map"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2136.986005919501!2d-73.9685579655238!3d40.75862446708152!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c258e4a1c884e5%3A0x24fe1071086b36d5!2sThe%20Atrium!5e0!3m2!1sen!2sbd!4v1585132512970!5m2!1sen!2sbd"></iframe>
+    </div>
+    <!-- Google Map Area Start -->
+</div>
+{% endblock %}

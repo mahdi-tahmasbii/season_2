@@ -10,10 +10,11 @@
             <div class="swiper-wrapper">
 
                 <!-- Hero Slider Item Start -->
+                {% for slide in slider %}
                 <div class="hero-slide-item swiper-slide">
                     <!-- Hero Slider Bg Image Start -->
                     <div class="hero-slide-bg">
-                        <img src="static/images/slider/slide-1.jpg" alt="Slider Image"/>
+                        <img src="{{slide.image.url}}" alt="Slider Image"/>
                     </div>
                     <!-- Hero Slider Bg image End -->
 
@@ -21,41 +22,16 @@
                     <div class="container">
                         <div class="hero-slide-content">
                             <h2 class="title">
-                                Women New <br/>
-                                Collection
+                                {{slide.title}}
                             </h2>
-                            <p>Up to 70% off selected Product</p>
-                            <a href="shop-grid.html" class="btn btn-lg btn-primary btn-hover-dark">Shop Now</a>
+                            <p>{{slide.description }}</p>
+                            <a href="{{slide.link}}" class="btn btn-lg btn-primary btn-hover-dark">Shop Now</a>
                         </div>
                     </div>
                     <!-- Hero Slider Content End -->
                 </div>
                 <!-- Hero Slider Item End -->
-
-                <!-- Hero Slider Item Start -->
-                <div class="hero-slide-item swiper-slide">
-
-                    <!-- Hero Slider Bg Image Start -->
-                    <div class="hero-slide-bg">
-                        <img src="static/images/slider/slide-1-2.jpg" alt="Slider Image"/>
-                    </div>
-                    <!-- Hero Slider Bg Image End -->
-
-                    <!-- Hero Slider Content Start -->
-                    <div class="container">
-                        <div class="hero-slide-content">
-                            <h2 class="title">
-                                Trend Fashion<br/>
-                                Collection
-                            </h2>
-                            <p>Up to 40% off selected Product</p>
-                            <a href="shop-grid.html" class="btn btn-lg btn-primary btn-hover-dark">Shop Now</a>
-                        </div>
-                    </div>
-                    <!-- Hero Slider Content End -->
-
-                </div>
-                <!-- Hero Slider Item End -->
+                {% endfor %}
 
             </div>
 
@@ -81,57 +57,48 @@
 
         <!-- Banners Start -->
         <div class="row mb-n6">
-            <!-- Banner Start -->
             <div class="col-lg-4 col-md-6 col-12 mb-6">
                 <div class="banner" data-aos="fade-up" data-aos-delay="300">
                     <div class="banner-image">
-                        <a href=""><img src="static/images/banner/banner-1.jpg" alt=""></a>
+                        <a href=""><img src="{{banner_1.image.url}}" alt=""></a>
                     </div>
                     <div class="info">
                         <div class="small-banner-content">
-                            <h4 class="sub-title">Sun Hat</h4>
-                            <h3 class="title">Get Offer <br/>For Summer</h3>
-                            <a href="shop-grid.html" class="btn btn-dark btn-sm">Shop Now</a>
+                            <h4 class="sub-title">New</h4>
+                            <h3 class="title">{{banner_1.title }}</h3>
+                            <a href="{{banner_1.link }}" class="btn btn-dark btn-sm">Shop Now</a>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- Banner End -->
-
-            <!-- Banner Start -->
             <div class="col-lg-4 col-md-6 col-12 mb-6">
-                <div class="banner" data-aos="fade-up" data-aos-delay="500">
+                <div class="banner" data-aos="fade-up" data-aos-delay="300">
                     <div class="banner-image">
-                        <a href=""><img src="static/images/banner/banner-2.jpg" alt=""></a>
+                        <a href=""><img src="{{banner_2.image.url}}" alt=""></a>
                     </div>
                     <div class="info">
                         <div class="small-banner-content">
-                            <h4 class="sub-title">Ladies Bag</h4>
-                            <h3 class="title">Buy One <br/>Get One Free</h3>
-                            <a href="shop-grid.html" class="btn btn-dark btn-sm">Shop Now</a>
+                            <h4 class="sub-title">New</h4>
+                            <h3 class="title">{{banner_2.title }}</h3>
+                            <a href="{{banner_2.link }}" class="btn btn-dark btn-sm">Shop Now</a>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- Banner End -->
-
-            <!-- Banner Start -->
             <div class="col-lg-4 col-md-6 col-12 mb-6">
-                <div class="banner" data-aos="fade-up" data-aos-delay="700">
+                <div class="banner" data-aos="fade-up" data-aos-delay="300">
                     <div class="banner-image">
-                        <a href=""><img src="static/images/banner/banner-3.jpg" alt=""></a>
+                        <a href=""><img src="{{banner_3.image.url}}" alt=""></a>
                     </div>
                     <div class="info">
                         <div class="small-banner-content">
-                            <h4 class="sub-title">Smart Watch</h4>
-                            <h3 class="title">20% Off <br/>Smart Watch</h3>
-                            <a href="shop-grid.html" class="btn btn-dark btn-sm">Shop Now</a>
+                            <h4 class="sub-title">New</h4>
+                            <h3 class="title">{{banner_3.title }}</h3>
+                            <a href="{{banner_3.link }}" class="btn btn-dark btn-sm">Shop Now</a>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- Banner End -->
-
         </div>
         <!-- Banners End -->
     </div>
@@ -1043,7 +1010,7 @@
             <div class="col-12" data-aos="fade-up" data-aos-delay="300">
                 <div class="banner">
                     <div class="banner-image">
-                        <a href="shop-grid.html"><img src="static/images/banner/big-banner.jpg" alt="Banner"></a>
+                        <a href="shop-grid.html"><img src="{{ slider2.image.url }}" alt="Banner"></a>
                     </div>
                 </div>
             </div>
@@ -1345,12 +1312,26 @@
             <div class="col-md-6 col-12 mb-6" data-aos="fade-right" data-aos-delay="300">
                 <div class="banner">
                     <div class="banner-image">
-                        <a href="shop-grid.html"><img src="static/images/banner/banner-4.jpg" alt="Banner Image"></a>
+                        <a href="shop-grid.html"><img src="{{banner_4.image.url}}" alt="Banner Image"></a>
                     </div>
                     <div class="info">
                         <div class="small-banner-content">
-                            <h4 class="sub-title">Up to <span>50%</span> Off</h4>
-                            <h3 class="title">Office Dress</h3>
+                            <h4 class="sub-title">{{banner_4.description }}</h4>
+                            <h3 class="title">{{banner_4.title}}</h3>
+                            <a href="shop-grid.html" class="btn btn-primary btn-hover-dark btn-sm">Shop Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+             <div class="col-md-6 col-12 mb-6" data-aos="fade-right" data-aos-delay="300">
+                <div class="banner">
+                    <div class="banner-image">
+                        <a href="shop-grid.html"><img src="{{banner_5.image.url}}" alt="Banner Image"></a>
+                    </div>
+                    <div class="info">
+                        <div class="small-banner-content">
+                            <h4 class="sub-title">{{banner_5.description }}</h4>
+                            <h3 class="title">{{banner_5.title}}</h3>
                             <a href="shop-grid.html" class="btn btn-primary btn-hover-dark btn-sm">Shop Now</a>
                         </div>
                     </div>
@@ -1358,22 +1339,6 @@
             </div>
             <!-- Banner End -->
 
-            <!-- Banner Start -->
-            <div class="col-md-6 col-12 mb-6" data-aos="fade-left" data-aos-delay="300">
-                <div class="banner">
-                    <div class="banner-image">
-                        <a href="shop-grid.html"><img src="static/images/banner/banner-5.jpg" alt="Banner Image"></a>
-                    </div>
-                    <div class="info">
-                        <div class="small-banner-content">
-                            <h4 class="sub-title">Up to <span>40%</span> Off</h4>
-                            <h3 class="title">All Products</h3>
-                            <a href="shop-grid.html" class="btn btn-primary btn-hover-dark btn-sm">Shop Now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Banner End -->
 
         </div>
         <!-- Banners End -->
