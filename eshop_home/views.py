@@ -19,7 +19,7 @@ def home_page(request):
     banner_4= Banner_4.objects.first()
     banner_5= Banner_5.objects.first()
     most_visit_products = ProductsList.objects.order_by('-visit_count').all()
-    latest_products = ProductsList.objects.order_by('-id').all()
+    latest_products = ProductsList.objects.order_by('-id').all()[:6]
     products = ProductsList.objects.all()
     paginate_by = 9
     context = {

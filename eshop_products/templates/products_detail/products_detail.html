@@ -100,9 +100,9 @@
                     <!-- Rating Start -->
 
                     {% ratings product %}
-                        <!-- Rating End -->
+                    <!-- Rating End -->
                     <div class="price-box mb-2">
-                        <span ><del>{{ product.description | safe}}</del></span>
+                        <span><del>{{ product.description | safe}}</del></span>
                     </div>
                     <!-- SKU Start -->
                     <div class="sku mb-3">
@@ -161,7 +161,8 @@
                             <a class="btn btn-outline-dark btn-hover-primary" href="cart.html">Add to cart</a>
                         </div>
                         <div class="add-to-wishlist">
-                            <a class="btn btn-outline-dark btn-hover-primary" href="{% url 'eshop_products:products_list' %}">Shop</a>
+                            <a class="btn btn-outline-dark btn-hover-primary"
+                               href="{% url 'eshop_products:products_list' %}">Shop</a>
                         </div>
                     </div>
                     <!-- Cart & Wishlist Button End -->
@@ -341,17 +342,16 @@
                             <div class="product product-border-left aos-init aos-animate" data-aos="fade-up"
                                  data-aos-delay="300">
                                 <div class="thumb">
-                                    <a href="{{ product.get_absolute_url }}" class="image" style="width:300px">
-                                        <img class="first-image" src="{{ product.image.url }}"
+                                    <a href="{{ product.get_absolute_url }}" class="image" >
+                                        <img class="first-image" src="{{ product.image.url }}" style="width:250px;height:200"
                                              alt="Product">
-                                        <img class="second-image" src="{{ product.image.url }}"
+                                        <img class="second-image" src="{{ product.image.url }}" style="width:250px;height:200"
                                              alt="Product">
                                     </a>
 
                                 </div>
                                 <div class="content">
-                                    <h4 ><a href="{{ product.get_absolute_url }}">
-                                        {{ product.description | striptags }}</a></h4>
+                                   <span>Studio Design</span>
                                     <h5 class="title"><a href="{{ product.get_absolute_url }}">{{ product.title }}</a>
                                     </h5>
                                     {% ratings product %}
@@ -360,7 +360,7 @@
                                         <!--                                            <span class="old">$42.85</span>-->
                                             </span>
                                     <a href="{{ product.get_absolute_url }}"
-                                       class="btn btn-lg btn-outline-dark btn-hover-primary">See More</a>
+                                       class="btn btn-sm btn-outline-dark btn-hover-primary">See More</a>
 
                                 </div>
                             </div>
