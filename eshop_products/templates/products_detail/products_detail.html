@@ -109,7 +109,6 @@
                         <p class="desc-content mb-5">{{ product.made_in }}</p>
                     </div>
                     <!-- SKU End -->
-
                     <!-- Description Start -->
                     <!-- Description End -->
 
@@ -123,14 +122,6 @@
                     </div>
                     <!-- Product Meta End -->
 
-                    <!-- Product Color Variation Start -->
-                    <div class="product-color-variation mb-3">
-                        <button type="button" class="btn bg-danger"></button>
-                        <button type="button" class="btn bg-primary"></button>
-                        <button type="button" class="btn bg-dark"></button>
-                        <button type="button" class="btn bg-success"></button>
-                    </div>
-                    <!-- Product Color Variation End -->
 
                     <!-- Product Meta Start -->
                     <div class="product-meta mb-5">
@@ -142,28 +133,36 @@
                         <!-- Product Metarial End -->
                     </div>
                     <!-- Product Meta End -->
+                    <form action="{% url 'user-order:add-user-order' %}" method="post">
+                        {% csrf_token %}
+                        {{ new_order_form.product_id }}
+                        <span class="product-var__text">Quantity</span>
+                        <div class="product-quantity-box">
+                            <div class="quantity">
+                                {{ new_order_form.count }}
+                                <div class="quantity-nav">
+                                    <div class="quantity-button quantity-up"><i
+                                            class="icon-chevron-up"></i></div>
+                                    <div class="quantity-button quantity-down"><i
+                                            class="icon-chevron-down"></i></div>
+                                </div>
+                            </div>
+                            <br>
+                            <input type="submit" value="Add to cart"
+                                   class="btn btn-outline-dark btn-hover-primary">
+                            <a class="btn btn-outline-dark btn-hover-primary"
+                               href="{% url 'eshop_products:products_list' %}">Shop</a>
+                        </div>
+                    </form>
 
                     <!-- Quantity Start -->
-                    <div class="quantity mb-5">
-                        <div class="cart-plus-minus">
-                            <input class="cart-plus-minus-box" value="0" type="text">
-                            <div class="dec qtybutton"></div>
-                            <div class="inc qtybutton"></div>
-                            <div class="dec qtybutton"><i class="fa fa-minus"></i></div>
-                            <div class="inc qtybutton"><i class="fa fa-plus"></i></div>
-                        </div>
-                    </div>
+
                     <!-- Quantity End -->
 
                     <!-- Cart & Wishlist Button Start -->
                     <div class="cart-wishlist-btn mb-4">
-                        <div class="add-to_cart">
-                            <a class="btn btn-outline-dark btn-hover-primary" href="cart.html">Add to cart</a>
-                        </div>
-                        <div class="add-to-wishlist">
-                            <a class="btn btn-outline-dark btn-hover-primary"
-                               href="{% url 'eshop_products:products_list' %}">Shop</a>
-                        </div>
+
+
                     </div>
                     <!-- Cart & Wishlist Button End -->
 
@@ -342,16 +341,18 @@
                             <div class="product product-border-left aos-init aos-animate" data-aos="fade-up"
                                  data-aos-delay="300">
                                 <div class="thumb">
-                                    <a href="{{ product.get_absolute_url }}" class="image" >
-                                        <img class="first-image" src="{{ product.image.url }}" style="width:250px;height:200"
+                                    <a href="{{ product.get_absolute_url }}" class="image">
+                                        <img class="first-image" src="{{ product.image.url }}"
+                                             style="width:250px;height:200"
                                              alt="Product">
-                                        <img class="second-image" src="{{ product.image.url }}" style="width:250px;height:200"
+                                        <img class="second-image" src="{{ product.image.url }}"
+                                             style="width:250px;height:200"
                                              alt="Product">
                                     </a>
 
                                 </div>
                                 <div class="content">
-                                   <span>Studio Design</span>
+                                    <span>Studio Design</span>
                                     <h5 class="title"><a href="{{ product.get_absolute_url }}">{{ product.title }}</a>
                                     </h5>
                                     {% ratings product %}

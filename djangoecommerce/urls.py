@@ -24,6 +24,7 @@ urlpatterns = [
     path('', include('eshop_home.urls')),
     path('', include('eshop_products.urls')),
     path('', include('eshop_settings.urls')),
+    path('', include('products_order.urls')),
     path('comment/', include('comment.urls')),
     re_path(r'^ratings/', include('star_ratings.urls', namespace='ratings')),
     path('account/', include('account.urls')),

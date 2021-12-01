@@ -1,0 +1,141 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="section">
+
+    <!-- Breadcrumb Area Start -->
+    <div class="breadcrumb-area bg-light">
+        <div class="container-fluid">
+            <div class="breadcrumb-content text-center">
+                <h1 class="title">Shopping Cart</h1>
+                <ul>
+                    <li>
+                        <a href="index.html">Home </a>
+                    </li>
+                    <li class="active"> Shopping Cart</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb Area End -->
+
+</div>
+<div class="section section-margin">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-12">
+
+                <!-- Cart Table Start -->
+                {% if order != None and details|length > 0 %}
+                <div class="cart-table table-responsive">
+                    <table class="table table-bordered">
+
+                        <!-- Table Head Start -->
+                        <thead>
+                        <tr>
+                            <th class="pro-thumbnail">Image</th>
+                            <th class="pro-title">Product</th>
+                            <th class="pro-price">Price</th>
+                            <th class="pro-quantity">Quantity</th>
+                            <th class="pro-subtotal">Total</th>
+                            <th class="pro-remove">Remove</th>
+                        </tr>
+                        </thead>
+                        <!-- Table Head End -->
+
+                        <!-- Table Body Start -->
+                        <tbody>
+                        {% for detail in details %}
+                        <tr>
+                            <td class="pro-thumbnail"><a href="{{ detail.product.get_absolute_url }}"><img
+                                    class="img-fluid"
+                                    src="{{detail.product.image.url }}"
+                                    alt="Product"></a></td>
+                            <td class="pro-title"><a href="{{ detail.product.get_absolute_url }}">
+                                {{detail.product.title }}<br></a></td>
+                            <td class="pro-price"><span>${{ detail.product.price }}</span></td>
+                            <td class="pro-quantity">
+                                <div class="quantity">
+                                    {{ detail.count }}
+                                </div>
+                            </td>
+                            <td class="pro-subtotal"><span>${{ detail.get_detail_sum }}</span></td>
+                            <td class="pro-remove"><a href="/remove-order-detail/{{ detail.id }}"><i
+                                    class="pe-7s-trash"></i></a></td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                        <!-- Table Body End -->
+
+                    </table>
+                </div>
+                {% else %}
+                <div class="alert alert-warning">
+                    <p>
+                        Nothing In Your Buying List
+                    </p>
+                </div>
+                {% endif %}
+                <!-- Cart Table End -->
+
+                <!-- Cart Update Option Start -->
+                <div class="cart-update-option d-block d-md-flex justify-content-between">
+
+
+                </div>
+                <!-- Cart Update Option End -->
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-5 ms-auto col-custom">
+
+                <!-- Cart Calculation Area Start -->
+                <div class="cart-calculator-wrapper">
+
+                    <!-- Cart Calculate Items Start -->
+                    <div class="cart-calculate-items">
+
+                        <!-- Cart Calculate Items Title Start -->
+                        <h3 class="title">Cart Totals</h3>
+                        <!-- Cart Calculate Items Title End -->
+
+                        <!-- Responsive Table Start -->
+                        <div class="table-responsive">
+                            <table class="table">
+                                <tbody>
+                                {% for product in details %}
+                                <tr>
+                                    <td>{{ product.product.title }}  </td>
+                                    <td>X{{ product.count }}</td>
+                                </tr>
+                                {% endfor %}
+                                <tr class="total">
+                                    <td>Total</td>
+                                    <td class="total-amount">${{ total }}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- Responsive Table End -->
+
+                    </div>
+                    <!-- Cart Calculate Items End -->
+
+                    <!-- Cart Checktout Button Start -->
+                    <a href="{% url 'user-order:request' %}" class="btn btn-dark btn-hover-primary rounded-0 w-100">Proceed To
+                        Checkout</a>
+                    <!-- Cart Checktout Button End -->
+
+                </div>
+                <!-- Cart Calculation Area End -->
+
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock  %}

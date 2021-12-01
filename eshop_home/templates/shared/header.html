@@ -89,10 +89,12 @@
                             <!-- Wishlist Header Action Button End -->
 
                             <!-- Shopping Cart Header Action Button Start -->
-                            <a href="javascript:void(0)" class="header-action-btn header-action-btn-cart">
+                             {% if  request.user.is_authenticated %}
+                            <a href="{% url 'user-order:user_open_order' %}"
+                               class="header-action-btn header-action-btn-cart">
                                 <i class="pe-7s-shopbag"></i>
-                                <span class="header-action-num">3</span>
                             </a>
+                            {% endif %}
                             <!-- Shopping Cart Header Action Button End -->
 
                             <!-- Mobile Menu Hambarger Action Button Start -->

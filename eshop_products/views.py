@@ -14,6 +14,9 @@ from django.db.models import Count
 
 
 # Create your views here.
+from products_order.forms import UserNewOrderForm
+
+
 def products_list(request, slug=None):
     products = models.ProductsList.objects.all()[:9]
     paginator = Paginator(products, 9)
@@ -55,6 +58,7 @@ def product_tag(request, slug):
 
 def products_detail(request, *args, **kwargs):
     selected_product_id = kwargs['productId']
+    new_order_form = UserNewOrderForm(request.POST or None, initial={'product_id': selected_product_id})
     product: models.ProductsList = models.ProductsList.objects.get_by_id(selected_product_id)
     product_gallery = models.ProductsGallery.objects.filter(product_id=selected_product_id)
     related_products = models.ProductsList.objects.get_queryset().filter(categories__products=product).distinct()
@@ -66,7 +70,7 @@ def products_detail(request, *args, **kwargs):
         'product': product,
         'gallery': product_gallery,
         'related_products': related_products,
-
+        'new_order_form': new_order_form,
     }
     return render(request, 'products_detail/products_detail.html', context)
 
