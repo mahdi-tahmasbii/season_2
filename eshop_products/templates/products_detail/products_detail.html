@@ -92,8 +92,7 @@
 
                     <!-- Price Box Start -->
                     <div class="price-box mb-2">
-                        <!--                        <span class="old-price">${{ product.discount }}</span>-->
-                        <span class="regular-price"><del>${{ product.price }}</del></span>
+                        <span class="regular-price">${{ product.price }}</span>
                     </div>
                     <!-- Price Box End -->
 
@@ -102,7 +101,7 @@
                     {% ratings product %}
                     <!-- Rating End -->
                     <div class="price-box mb-2">
-                        <span><del>{{ product.description | safe}}</del></span>
+                        <span>{{ product.description | safe}}</span>
                     </div>
                     <!-- SKU Start -->
                     <div class="sku mb-3">
@@ -137,8 +136,8 @@
                         {% csrf_token %}
                         {{ new_order_form.product_id }}
                         <span class="product-var__text">Quantity</span>
-                        <div class="product-quantity-box">
-                            <div class="quantity">
+                        <div class="product-quantity-box rounded">
+                            <div class="quantity ">
                                 {{ new_order_form.count }}
                                 <div class="quantity-nav">
                                     <div class="quantity-button quantity-up"><i
@@ -168,11 +167,11 @@
 
                     <!-- Social Shear Start -->
                     <div class="social-share">
-                        <span>Share :</span>
-                        <a href="#"><i class="fa fa-facebook-square facebook-color"></i></a>
-                        <a href="#"><i class="fa fa-twitter-square twitter-color"></i></a>
-                        <a href="#"><i class="fa fa-linkedin-square linkedin-color"></i></a>
-                        <a href="#"><i class="fa fa-pinterest-square pinterest-color"></i></a>
+                        <span>MY Social :</span>
+                        <a href="https://github.com/mahdi-tahmasb"><i class="fa fa-github"></i></a>
+                        <a href="https://t.me/ttmahdii"><i class="fa fa-telegram "></i></a>
+                        <a href="https://www.instagram.com/_ttmahdi/"><i class="fa fa-instagram "></i></a>
+                        <a href="https://www.linkedin.com/in/mahdi-tahmasbi-163282217/"><i class="fa fa-linkedin-square linkedin-color"></i></a>
                     </div>
                     <!-- Social Shear End -->
 
