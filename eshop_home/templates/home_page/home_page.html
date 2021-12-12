@@ -386,7 +386,8 @@
 															<span class="sale">-30%</span>
                                                     </span>
                                             </div>
-                                            <div class="content">
+                                            <div class="content">                                            <br>
+
 
                                                 <h4 class="sub-title"><a href="{{ product.get_absolute_url }}">Studio
                                                     Design</a></h4>
@@ -587,141 +588,7 @@
 <div class="section section-padding">
     <div class="container">
         <div class="row mb-n8">
-            <div class="col-md-6 col-lg-4 col-12 mb-8" data-aos="fade-up" data-aos-delay="300">
-                <!-- Product List Title Start -->
-                <div class="product-list-title">
-                    <h2 class="title pb-3 mb-0"> Special </h2>
-                    <span></span>
-                </div>
-                <!-- Product List Title End -->
-
-                <!-- Product List Carousel Start -->
-                <div class="product-list-carousel">
-                    <div class="swiper-container">
-                        <div class="swiper-wrapper">
-
-                            <!-- Product List Wrapper Start -->
-                            {% for product in products %}
-                            {% if product.is_especial %}
-                            <div class="swiper-slide product-list-wrapper mb-n6">
-
-                                <!-- Single Product List Start -->
-                                <div class="single-product-list product-hover mb-6">
-
-                                    <div class="thumb">
-                                        <a href="{{product.get_absolute_url}}" class="image">
-                                            <img class="first-image" src="{{product.image.url}}" style="height:100px"
-                                                 alt="Product"/>
-                                            <img class="second-image" src="{{product.image.url}}"
-                                                 alt="Product"/>
-                                        </a>
-                                    </div>
-                                    <div class="content">
-                                         <p>Studio Design</p>
-                                        <h5 class="title"><a href="{{product.get_absolute_url}}">{{product.title}}</a>
-                                        </h5>
-                                        {% ratings product %}
-                                        <span class="price">
-													<span class="new">${{product.price }}</span>
-                                            </span>
-
-                                    </div>
-                                </div>
-                                <!-- Single Product List End -->
-
-                            </div>
-                            {% endif %}
-                            {% endfor %}
-
-                            <!-- Product List Wrapper End -->
-
-                            <!-- Product List Wrapper Start -->
-                            <!-- Product List Wrapper End -->
-
-                        </div>
-
-                        <!-- Swiper Pagination Start -->
-                        <!-- <div class="swiper-pagination d-md-none"></div> -->
-                        <!-- Swiper Pagination End -->
-
-                        <!-- Next Previous Button Start -->
-                        <div class="swiper-product-list-next swiper-button-next"><i class="pe-7s-angle-right"></i></div>
-                        <div class="swiper-product-list-prev swiper-button-prev"><i class="pe-7s-angle-left"></i></div>
-                        <!-- Next Previous Button End -->
-
-                    </div>
-                </div>
-                <!-- Product List Carousel End -->
-
-            </div>
-            <div class="col-md-6 col-lg-4 col-12 mb-8" data-aos="fade-up" data-aos-delay="300">
-                <!-- Product List Title Start -->
-                <div class="product-list-title">
-                    <h2 class="title pb-3 mb-0"> Suggestion</h2>
-                    <span></span>
-                </div>
-                <!-- Product List Title End -->
-
-                <!-- Product List Carousel Start -->
-                <div class="product-list-carousel">
-                    <div class="swiper-container">
-                        <div class="swiper-wrapper">
-
-                            <!-- Product List Wrapper Start -->
-                            {% for product in products %}
-                            {% if product.our_suggestion %}
-                            <div class="swiper-slide product-list-wrapper mb-n6">
-
-                                <!-- Single Product List Start -->
-                                <div class="single-product-list product-hover mb-6">
-
-                                    <div class="thumb">
-                                        <a href="{{product.get_absolute_url}}" class="image">
-                                            <img class="first-image" src="{{product.image.url}}" style="height:100px"
-                                                 alt="Product"/>
-                                            <img class="second-image" src="{{product.image.url}}"
-                                                 alt="Product"/>
-                                        </a>
-                                    </div>
-                                    <div class="content">
-                                        <p>Studio Design</p>
-                                        <h5 class="title"><a href="{{product.get_absolute_url}}">{{product.title}}</a>
-                                        </h5>
-                                        {% ratings product %}
-                                        <span class="price">
-													<span class="new">${{product.price }}</span>
-                                            </span>
-
-                                    </div>
-                                </div>
-                                <!-- Single Product List End -->
-
-                            </div>
-                            {% endif %}
-                            {% endfor %}
-
-                            <!-- Product List Wrapper End -->
-
-                            <!-- Product List Wrapper Start -->
-                            <!-- Product List Wrapper End -->
-
-                        </div>
-
-                        <!-- Swiper Pagination Start -->
-                        <!-- <div class="swiper-pagination d-md-none"></div> -->
-                        <!-- Swiper Pagination End -->
-
-                        <!-- Next Previous Button Start -->
-                        <div class="swiper-product-list-next swiper-button-next"><i class="pe-7s-angle-right"></i></div>
-                        <div class="swiper-product-list-prev swiper-button-prev"><i class="pe-7s-angle-left"></i></div>
-                        <!-- Next Previous Button End -->
-
-                    </div>
-                </div>
-                <!-- Product List Carousel End -->
-
-            </div>
-            <div class="col-md-6 col-lg-4 col-12 mb-8" data-aos="fade-up" data-aos-delay="300">
+            <div class="col-md-6 col-lg-4 col-12 mb-8 aos-init aos-animate" data-aos="fade-up" data-aos-delay="300">
                 <!-- Product List Title Start -->
                 <div class="product-list-title">
                     <h2 class="title pb-3 mb-0">Best Offer</h2>
@@ -731,47 +598,53 @@
 
                 <!-- Product List Carousel Start -->
                 <div class="product-list-carousel">
-                    <div class="swiper-container">
-                        <div class="swiper-wrapper">
+                    <div class="swiper-container swiper-container-initialized swiper-container-horizontal">
+                        <div class="swiper-wrapper"
+                             style="transform: translate3d(-400px, 0px, 0px); transition: all 0ms ease 0s;"
+                             id="swiper-wrapper-43de613f0f9162f5" aria-live="polite">
 
                             <!-- Product List Wrapper Start -->
-                            {% for product in products %}
-                            {% if product.offer %}
-                            <div class="swiper-slide product-list-wrapper mb-n6">
+                            <div class="swiper-slide product-list-wrapper mb-n6 swiper-slide-active"
+                                 data-swiper-slide-index="0" style="width: 400px;" role="group" aria-label="2 / 4">
 
                                 <!-- Single Product List Start -->
-                                <div class="single-product-list product-hover mb-6">
+                                {% for product in products %}
+                                {% if product.is_especial %}
+                                <div class="swiper-slide product-list-wrapper mb-n6">
 
-                                    <div class="thumb">
-                                        <a href="{{product.get_absolute_url}}" class="image">
-                                            <img class="first-image" src="{{product.image.url}}" style="height:100px"
-                                                 alt="Product"/>
-                                            <img class="second-image" src="{{product.image.url}}"
-                                                 alt="Product"/>
-                                        </a>
-                                    </div>
-                                    <div class="content">
-                                        <p>Studio Design</p>
+                                    <!-- Single Product List Start -->
+                                    <div class="single-product-list product-hover mb-6">
 
-                                        <h5 class="title"><a href="{{product.get_absolute_url}}">{{product.title}}</a>
-                                        </h5>
-                                        {% ratings product %}
-                                        <span class="price">
+                                          <div>
+                                            <a href="{{product.get_absolute_url}}" class="image">
+                                                <img class="first-image" src="{{product.image.url}}"
+                                                     style="height:100px;width:100px"
+                                                     alt="Product"/>
+                                            </a>
+                                        </div>
+                                        <div class="content">
+                                            <p>Studio Design</p>
+                                            <h5 class="title"><a
+                                                    href="{{product.get_absolute_url}}">{{product.title}}</a>
+                                            </h5>
+                                            {% ratings product %}
+                                            <span class="price">
 													<span class="new">${{product.price }}</span>
                                             </span>
 
+                                        </div>
                                     </div>
+                                    <!-- Single Product List End -->
+
                                 </div>
+                                {% endif %}
+                                {% endfor %}
                                 <!-- Single Product List End -->
 
+
                             </div>
-                            {% endif %}
-                            {% endfor %}
-
                             <!-- Product List Wrapper End -->
 
-                            <!-- Product List Wrapper Start -->
-                            <!-- Product List Wrapper End -->
 
                         </div>
 
@@ -780,11 +653,171 @@
                         <!-- Swiper Pagination End -->
 
                         <!-- Next Previous Button Start -->
-                        <div class="swiper-product-list-next swiper-button-next"><i class="pe-7s-angle-right"></i></div>
-                        <div class="swiper-product-list-prev swiper-button-prev"><i class="pe-7s-angle-left"></i></div>
+                        <div class="swiper-product-list-next swiper-button-next" tabindex="0" role="button"
+                             aria-label="Next slide" aria-controls="swiper-wrapper-43de613f0f9162f5"><i
+                                class="pe-7s-angle-right"></i></div>
+                        <div class="swiper-product-list-prev swiper-button-prev" tabindex="0" role="button"
+                             aria-label="Previous slide" aria-controls="swiper-wrapper-43de613f0f9162f5"><i
+                                class="pe-7s-angle-left"></i></div>
                         <!-- Next Previous Button End -->
 
-                    </div>
+                        <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
+                </div>
+                <!-- Product List Carousel End -->
+
+            </div>
+            <div class="col-md-6 col-lg-4 col-12 mb-8 aos-init aos-animate" data-aos="fade-up" data-aos-delay="300">
+                <!-- Product List Title Start -->
+                <div class="product-list-title">
+                    <h2 class="title pb-3 mb-0">Best Offer</h2>
+                    <span></span>
+                </div>
+                <!-- Product List Title End -->
+
+                <!-- Product List Carousel Start -->
+                <div class="product-list-carousel">
+                    <div class="swiper-container swiper-container-initialized swiper-container-horizontal">
+                        <div class="swiper-wrapper"
+                             style="transform: translate3d(-400px, 0px, 0px); transition: all 0ms ease 0s;"
+                             id="swiper-wrapper-43de613f0f9162f5" aria-live="polite">
+
+                            <!-- Product List Wrapper Start -->
+                            <div class="swiper-slide product-list-wrapper mb-n6 swiper-slide-active"
+                                 data-swiper-slide-index="0" style="width   : 400px;" role="group" aria-label="2 / 4">
+
+                                <!-- Single Product List Start -->
+                                {% for product in products %}
+                                {% if product.our_suggestion %}
+                                <div class="swiper-slide product-list-wrapper mb-n6">
+
+                                    <!-- Single Product List Start -->
+                                    <div class="single-product-list product-hover mb-6">
+
+                                        <div>
+                                            <a href="{{product.get_absolute_url}}" class="image">
+                                                <img class="first-image" src="{{product.image.url}}"
+                                                     style="height:100px;width:100px"
+                                                     alt="Product"/>
+                                            </a>
+                                        </div>
+                                        <div class="content">
+                                            <p>Studio Design</p>
+                                            <h5 class="title"><a
+                                                    href="{{product.get_absolute_url}}">{{product.title}}</a>
+                                            </h5>
+                                            {% ratings product %}
+                                            <span class="price">
+													<span class="new">${{product.price }}</span>
+                                            </span>
+
+                                        </div>
+                                    </div>
+                                    <!-- Single Product List End -->
+
+                                </div>
+                                {% endif %}
+                                {% endfor %}
+                                <!-- Single Product List End -->
+
+
+                            </div>
+                            <!-- Product List Wrapper End -->
+
+
+                        </div>
+
+                        <!-- Swiper Pagination Start -->
+                        <!-- <div class="swiper-pagination d-md-none"></div> -->
+                        <!-- Swiper Pagination End -->
+
+                        <!-- Next Previous Button Start -->
+                        <div class="swiper-product-list-next swiper-button-next" tabindex="0" role="button"
+                             aria-label="Next slide" aria-controls="swiper-wrapper-43de613f0f9162f5"><i
+                                class="pe-7s-angle-right"></i></div>
+                        <div class="swiper-product-list-prev swiper-button-prev" tabindex="0" role="button"
+                             aria-label="Previous slide" aria-controls="swiper-wrapper-43de613f0f9162f5"><i
+                                class="pe-7s-angle-left"></i></div>
+                        <!-- Next Previous Button End -->
+
+                        <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
+                </div>
+                <!-- Product List Carousel End -->
+
+            </div>
+            <div class="col-md-6 col-lg-4 col-12 mb-8 aos-init aos-animate" data-aos="fade-up" data-aos-delay="300">
+                <!-- Product List Title Start -->
+                <div class="product-list-title">
+                    <h2 class="title pb-3 mb-0">Best Offer</h2>
+                    <span></span>
+                </div>
+                <!-- Product List Title End -->
+
+                <!-- Product List Carousel Start -->
+                <div class="product-list-carousel">
+                    <div class="swiper-container swiper-container-initialized swiper-container-horizontal">
+                        <div class="swiper-wrapper"
+                             style="transform: translate3d(-400px, 0px, 0px); transition: all 0ms ease 0s;"
+                             id="swiper-wrapper-43de613f0f9162f5" aria-live="polite">
+
+                            <!-- Product List Wrapper Start -->
+                            <div class="swiper-slide product-list-wrapper mb-n6 swiper-slide-active"
+                                 data-swiper-slide-index="0" style="width: 400px;" role="group" aria-label="2 / 4">
+
+                                <!-- Single Product List Start -->
+                                {% for product in products %}
+                                {% if product.offer %}
+                                <div class="swiper-slide product-list-wrapper mb-n6">
+
+                                    <!-- Single Product List Start -->
+                                    <div class="single-product-list product-hover mb-6">
+
+                                        <div>
+                                            <a href="{{product.get_absolute_url}}" class="image">
+                                                <img class="first-image" src="{{product.image.url}}"
+                                                     style="height:100px;width:100px"
+                                                     alt="Product"/>
+                                            </a>
+                                        </div>
+                                        <div class="content">
+                                            <p>Studio Design</p>
+                                            <h5 class="title"><a
+                                                    href="{{product.get_absolute_url}}">{{product.title}}</a>
+                                            </h5>
+                                            {% ratings product %}
+                                            <span class="price">
+													<span class="new">${{product.price }}</span>
+                                            </span>
+
+                                        </div>
+                                    </div>
+                                    <!-- Single Product List End -->
+
+                                </div>
+                                {% endif %}
+                                {% endfor %}
+                                <!-- Single Product List End -->
+
+
+                            </div>
+                            <!-- Product List Wrapper End -->
+
+
+                        </div>
+
+                        <!-- Swiper Pagination Start -->
+                        <!-- <div class="swiper-pagination d-md-none"></div> -->
+                        <!-- Swiper Pagination End -->
+
+                        <!-- Next Previous Button Start -->
+                        <div class="swiper-product-list-next swiper-button-next" tabindex="0" role="button"
+                             aria-label="Next slide" aria-controls="swiper-wrapper-43de613f0f9162f5"><i
+                                class="pe-7s-angle-right"></i></div>
+                        <div class="swiper-product-list-prev swiper-button-prev" tabindex="0" role="button"
+                             aria-label="Previous slide" aria-controls="swiper-wrapper-43de613f0f9162f5"><i
+                                class="pe-7s-angle-left"></i></div>
+                        <!-- Next Previous Button End -->
+
+                        <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
                 </div>
                 <!-- Product List Carousel End -->
 

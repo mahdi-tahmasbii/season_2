@@ -33,7 +33,7 @@
                     <!-- Shop Top Bar Left start -->
                     <div class="shop-top-bar-left mb-md-0 mb-2">
                         <div class="shop-top-show">
-                            <span>Showing 1–12 of {{products.count}} results</span>
+                            <span>Showing 1–{{products.count}} of {{products.count}} results</span>
                         </div>
                     </div>
                     <!-- Shop Top Bar Left end -->
@@ -64,7 +64,7 @@
                         <div class="product-inner">
                             <div class="thumb">
                                 <a href="{{ product.get_absolute_url }}" class="image">
-                                    <img style="width:300px;height:200px" class="first-image"
+                                    <img class="first-image"
                                          src="{{ product.image.url }}"
                                          alt="Product">
                                     <img class="second-image" src="{{ product.image.url }}"
