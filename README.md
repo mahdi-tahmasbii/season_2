@@ -1,6 +1,10 @@
 # season_2
 
+
+
 Hi,I`m Mahdi Tahmasbi
+
+Link : tmslife-eshop.ir
 
 I Build This Website with Python and Django And Use Mysql For DataBase. This Website Have : Login &
 Register/Custom Admin/Home Page/Shop List/ Detail
